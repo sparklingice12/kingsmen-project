@@ -7,7 +7,6 @@ export function useFetch(fn, deps = []) {
 
   useEffect(() => {
     let alive = true;
-    setLoading(true);
     
     fn()
       .then((d) => alive && setData(d))
@@ -15,6 +14,7 @@ export function useFetch(fn, deps = []) {
       .finally(() => alive && setLoading(false));
 
     return () => { alive = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   return { data, error, loading };

@@ -8,7 +8,6 @@ export function useGallery() {
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    setLoading(true);
     fetchGalleryItems()
       .then(setItems)
       .finally(() => setLoading(false));
