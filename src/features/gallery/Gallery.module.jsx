@@ -1,6 +1,6 @@
 import { useGallery } from './useGallery';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { GlassButton } from '@/components/ui/glass-button';
 
 export default function Gallery() {
     const { items, loading, currentPage, nextPage, prevPage } = useGallery();
@@ -27,8 +27,8 @@ export default function Gallery() {
             </div>
 
             <div className="flex gap-2 justify-center">
-                <Button onClick={prevPage} variant="outline">Previous</Button>
-                <Button onClick={nextPage}>Next</Button>
+                <GlassButton onClick={prevPage}>Previous</GlassButton>
+                <GlassButton onClick={nextPage}>Next</GlassButton>
             </div>
         </section>
     );

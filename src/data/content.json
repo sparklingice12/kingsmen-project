@@ -1,0 +1,194 @@
+{
+    "languages": [
+        {
+            "code": "kk",
+            "label": "Қазақша"
+        },
+        {
+            "code": "ru",
+            "label": "Русский"
+        },
+        {
+            "code": "en",
+            "label": "English"
+        }
+    ],
+    "ui": {
+        "attractor": {
+            "soil": {
+                "en": "Explore the fascinating varieties of soil found in space!",
+                "ru": "Исследуйте удивительные разновидности космического грунта!",
+                "kk": "Ғарышта табылған топырақтың қызықты түрлерін зерттеңіз!"
+            },
+            "touchToStart": {
+                "en": "Touch to Start",
+                "ru": "Нажмите, чтобы начать",
+                "kk": "Бастау үшін түртіңіз"
+            }
+        },
+        "gallery": {
+            "selectSoil": {
+                "en": "Explore the fascinating varieties of soil found in space!",
+                "ru": "Исследуйте удивительные разновидности космического грунта!",
+                "kk": "Ғарышта табылған топырақтың қызықты түрлерін зерттеңіз!"
+            }
+        },
+        "common": {
+            "back": {
+                "en": "Back",
+                "ru": "Назад",
+                "kk": "Артқа"
+            },
+            "close": {
+                "en": "Close",
+                "ru": "Закрыть",
+                "kk": "Жабу"
+            },
+            "endSession": {
+                "en": "End Session?",
+                "ru": "Завершить сеанс?",
+                "kk": "Сеансты аяқтау керек пе?"
+            },
+            "yes": {
+                "en": "Yes",
+                "ru": "Да",
+                "kk": "Иә"
+            },
+            "no": {
+                "en": "No",
+                "ru": "Нет",
+                "kk": "Жоқ"
+            },
+            "timeoutWarning": {
+                "en": "Session ends in",
+                "ru": "Сеанс завершится через",
+                "kk": "Сеанс аяқталады"
+            },
+            "confirm": {
+                "en": "Confirm",
+                "ru": "Подтвердить",
+                "kk": "Растау"
+            }
+        }
+    },
+    "data": {
+        "items": [
+            {
+                "id": "LMS-1D",
+                "title": {
+                    "en": "Lunar Mare Dust",
+                    "ru": "Лунная пыль (Моря)",
+                    "kk": "Ай теңізінің шаңы"
+                },
+                "description": {
+                    "en": "Three billion years ago, large asteroids crashed into the Moon and left behind massive craters called impact basins. Over time, volcanic lava flooded these basins and cooled to form lunar dust. This fine, dark regolith is made of rock particles and minerals which can be modified for plant healthy growth. ​ Three billion years ago, large asteroids crashed into the Moon and left behind massive craters called impact basins. Over time, volcanic lava flooded these basins and cooled to form lunar dust. This fine, dark regolith is made of rock particles and minerals which can be modified for plant healthy growth. Three billion years ago, large asteroids crashed into the Moon and left behind massive craters called impact basins. Over time, volcanic lava flooded these basins and cooled to form lunar dust. This fine, dark regolith is made of rock particles and minerals which can be modified for plant healthy growth. ​ Three billion years ago, large asteroids crashed into the Moon and left behind massive craters called impact basins. Over time, volcanic lava flooded these basins and cooled to form lunar dust. This fine, dark regolith is made of rock particles and minerals which can be modified for plant healthy growth.",
+                    "ru": "Три миллиарда лет назад крупные астероиды столкнулись с Луной и оставили за собой огромные кратеры, называемые кратерами-ударами. С течением времени волканическая лава озарила эти кратеры и охладилась, образуя лунную пыль. Этот мелкий темный реголит состоит из каменных частиц и минералов, которые можно модифицировать для здорового роста растений.",
+                    "kk": "Үш миллиард жыл бұрын Айға алып астероидтар соғылып, импакт бассейндері деп аталатын алып кратерлер қалдырды. Уақыт өте келе бұл бассейндерді жанартаулық лава басып, суып, ай топырағын түзіп шықты. Осы ұсақ, қара түсті реголит жартастар бөлшектері мен минералдардан құралған және оны өсімдіктердің сау өсіп-өнуіне лайықтап өзгертуге болады."
+                },
+                "image": "/soil/lms-1d.jpg",
+                "attribution": "AS17-154-23677, Apollo 17 Hasselblad images, March to the Moon, Arizona State University"
+            },
+            {
+                "id": "LHS-1-25A",
+                "title": {
+                    "en": "Lunar Highlands Anorthosite",
+                    "ru": "Анортозит лунных возвышенностей",
+                    "kk": "Ай таулы анортозиті"
+                },
+                "description": {
+                    "en": "Light-colored, rocky material from lunar highlands.",
+                    "ru": "Светлый скалистый материал с лунных возвышенностей.",
+                    "kk": "Ай тауларынан алынған ашық түсті тау жынысы."
+                },
+                "image": "/soil/lhs-1-25a.jpg"
+            },
+            {
+                "id": "LSP-2",
+                "title": {
+                    "en": "Lunar South Pole",
+                    "ru": "Южный полюс Луны",
+                    "kk": "Айдың оңтүстік полюсі"
+                },
+                "description": {
+                    "en": "Icy regolith from Schrödinger Impact Basin.",
+                    "ru": "Ледяной реголит из ударного бассейна Шрёдингера.",
+                    "kk": "Шредингер соққы бассейнінен алынған мұзды реголит."
+                },
+                "image": "/soil/lsp-2.jpg"
+            },
+            {
+                "id": "MGS-1",
+                "title": {
+                    "en": "Mars Global",
+                    "ru": "Марсианский грунт (Глобальный)",
+                    "kk": "Марс топырағы (Жаһандық)"
+                },
+                "description": {
+                    "en": "Reddish, iron-rich Martian soil.",
+                    "ru": "Красноватый, богатый железом марсианский грунт.",
+                    "kk": "Қызыл түсті, темірге бай Марс топырағы."
+                },
+                "image": "/soil/mgs-1.jpg",
+                "attribution": "ESA/DLR/FU Berlin, CC BY-SA 3.0 IGO"
+            },
+            {
+                "id": "MGS-1S",
+                "title": {
+                    "en": "Mars Global Polyhydrated Sulfate",
+                    "ru": "Марсианский полигидратный сульфат",
+                    "kk": "Марс жаһандық полигидратталған сульфаты"
+                },
+                "description": {
+                    "en": "Hydrated mineral-rich variant.",
+                    "ru": "Гидратированный вариант, богатый минералами.",
+                    "kk": "Минералдарға бай гидратталған нұсқа."
+                },
+                "image": "/soil/mgs-1s.jpg",
+                "attribution": "ESA/DLR/FU Berlin, CC BY-SA 3.0 IGO"
+            },
+            {
+                "id": "JEZ-1",
+                "title": {
+                    "en": "Jezero Delta",
+                    "ru": "Дельта Езеро",
+                    "kk": "Езеро атырауы"
+                },
+                "description": {
+                    "en": "Sedimentary deposits from ancient Martian river delta.",
+                    "ru": "Осадочные отложения из древней дельты марсианской реки.",
+                    "kk": "Ежелгі Марс өзенінің атырауынан алынған шөгінділер."
+                },
+                "image": "/soil/jez-1.jpg",
+                "attribution": "ESA/DLR/FU-Berlin, CC BY-SA 3.0 IGO"
+            },
+            {
+                "id": "CI-E",
+                "title": {
+                    "en": "Carbonaceous Chondrite",
+                    "ru": "Углистый хондрит (CI-E)",
+                    "kk": "Көміртекті хондрит (CI-E)"
+                },
+                "description": {
+                    "en": "Primitive meteorite material, water-bearing.",
+                    "ru": "Примитивный метеоритный материал, содержащий воду.",
+                    "kk": "Суы бар қарапайым метеориттік материал."
+                },
+                "image": "/soil/ci-e.jpg"
+            },
+            {
+                "id": "CM-E",
+                "title": {
+                    "en": "Carbonaceous Chondrite",
+                    "ru": "Углистый хондрит (CM-E)",
+                    "kk": "Көміртекті хондрит (CM-E)"
+                },
+                "description": {
+                    "en": "Similar to CI-E, with organic compounds.",
+                    "ru": "Похож на CI-E, с органическими соединениями.",
+                    "kk": "CI-E-ге ұқсас, органикалық қосылыстары бар."
+                },
+                "image": "/soil/cm-e.jpg"
+            }
+        ]
+    }
+}
