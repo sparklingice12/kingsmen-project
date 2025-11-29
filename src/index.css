@@ -4,8 +4,50 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+  font-family: "Brother 1816";
+  src: url("/fonts/Brother_1816_Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Brother 1816";
+  src: url("/fonts/Brother_1816_Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Brother 1816";
+  src: url("/fonts/Brother_1816_ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Frutiger World";
+  src: url("/fonts/NeueFrutigerWorld-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Frutiger World";
+  src: url("/fonts/NeueFrutigerWorld-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Frutiger World";
+  src: url("/fonts/NeueFrutigerWorld-Black.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+}
+
 @theme {
-  --font-sans: "Inter", "sans-serif";
+  --font-sans: "Brother 1816", "sans-serif";
   --font-mono: "Fira Code", "monospace";
 
   --radius-lg: var(--radius);
@@ -93,6 +135,11 @@
     --timing-base: 300ms;
   }
 
+  :root[lang="ru"],
+  :root[lang="kk"] {
+    --font-sans: "Neue Frutiger World", sans-serif;
+  }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -124,7 +171,7 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: "Inter", sans-serif;
+    font-family: "Brother 1816", sans-serif;
   }
 
   /* Reduced motion */
