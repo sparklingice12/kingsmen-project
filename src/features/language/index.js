@@ -7,6 +7,7 @@
 
 // Components
 export { LanguageSwitcherButton } from './components/LanguageSwitcherButton';
+export { LanguageSwitcherButtonSecondary } from './components/LanguageSwitcherButtonSecondary';
 export { LanguageSwitcherScreen } from './components/LanguageSwitcherScreen';
 
 // Hooks

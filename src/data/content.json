@@ -2,7 +2,7 @@
     "languages": [
         {
             "code": "kk",
-            "label": "Қазақша"
+            "label": "Қазақ"
         },
         {
             "code": "ru",
@@ -33,7 +33,38 @@
                 "kk": "Ғарышта табылған топырақтың қызықты түрлерін зерттеңіз!"
             }
         },
-        "common": {
+        "game": {
+        "breakdown": {
+            "endSession": {
+                "sessionEnding": {
+                    "en": "Session ending in...",
+                    "ru": "Игра завершится через…",
+                    "kk": "Сессия аяқталарға .... қалды"
+                },
+                "title": {
+                    "en": "END SESSION",
+                    "ru": "ЗАВЕРШИТЬ ИГРУ",
+                    "kk": "СЕССИЯНЫ АЯҚТАУ"
+                },
+                "message": {
+                    "en": "Are you sure you want to end the current game session?",
+                    "ru": "Ты уверен, что хочешь завершить эту игру?",
+                    "kk": "Шынымен осы ойын сессиясын аяқтағың келе ме?"
+                },
+                "yes": {
+                    "en": "YES",
+                    "ru": "ДА",
+                    "kk": "ИӘ"
+                },
+                "no": {
+                    "en": "NO",
+                    "ru": "ЖОҚ",
+                    "kk": "ЖОҚ"
+                }
+            }
+        }
+    },
+    "common": {
             "back": {
                 "en": "Back",
                 "ru": "Назад",
@@ -45,9 +76,26 @@
                 "kk": "Жабу"
             },
             "endSession": {
-                "en": "End Session?",
-                "ru": "Завершить сеанс?",
-                "kk": "Сеансты аяқтау керек пе?"
+                "title": {
+                    "en": "END SESSION",
+                    "ru": "ЗАВЕРШИТЬ ИГРУ",
+                    "kk": "СЕССИЯНЫ АЯҚТАУ"
+                },
+                "message": {
+                    "en": "Are you sure you want to end the current game session?",
+                    "ru": "Ты уверен, что хочешь завершить эту игру?",
+                    "kk": "Шынымен осы ойын сессиясын аяқтағың келе ме?"
+                },
+                "yes": {
+                    "en": "YES",
+                    "ru": "ДА",
+                    "kk": "ИӘ"
+                },
+                "no": {
+                    "en": "NO",
+                    "ru": "НЕТ",
+                    "kk": "ЖОҚ"
+                }
             },
             "yes": {
                 "en": "Yes",
@@ -60,9 +108,9 @@
                 "kk": "Жоқ"
             },
             "timeoutWarning": {
-                "en": "Session ends in",
-                "ru": "Сеанс завершится через",
-                "kk": "Сеанс аяқталады"
+                "en": "Session ending in...",
+                "ru": "Игра завершится через…",
+                "kk": "Сессия аяқталарға .... қалды"
             },
             "confirm": {
                 "en": "Confirm",
