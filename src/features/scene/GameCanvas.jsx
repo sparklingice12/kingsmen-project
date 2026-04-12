@@ -12,8 +12,15 @@ import TexturePreloader from './TexturePreloader';
  * - Performance optimizations
  * - Texture preloading to prevent black screen
  */
-function GameCanvas() {
+function GameCanvas({ onLoadingComplete }) {
     const [texturesLoaded, setTexturesLoaded] = useState(false);
+
+    const handleTexturesLoaded = () => {
+        setTexturesLoaded(true);
+        if (onLoadingComplete) {
+            onLoadingComplete();
+        }
+    };
 
     return (
         <div className="absolute inset-0 w-full h-full">
@@ -51,7 +58,7 @@ function GameCanvas() {
                 frameloop="always"
             >
                 <Suspense fallback={null}>
-                    <TexturePreloader onLoaded={() => setTexturesLoaded(true)}>
+                    <TexturePreloader onLoaded={handleTexturesLoaded}>
                         <Scene />
                     </TexturePreloader>
                 </Suspense>
