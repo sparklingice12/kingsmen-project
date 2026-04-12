@@ -1,0 +1,296 @@
+/* Quest Panel Overlay */
+.quest-panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+/* Quest Panel Container */
+.quest-panel {
+    background: linear-gradient(135deg, #2a3f54 0%, #1a2332 100%);
+    border-radius: 16px;
+    border: 3px solid #6ce0ff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+.quest-panel__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 2px solid rgba(108, 224, 255, 0.3);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.quest-panel__title {
+    font-family: 'Brother 1816', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #6ce0ff;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.quest-panel__close {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: white;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.quest-panel__close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #6ce0ff;
+    transform: scale(1.1);
+}
+
+/* Overall Progress */
+.quest-panel__progress {
+    padding: 16px 24px;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(108, 224, 255, 0.2);
+}
+
+.quest-panel__progress-text {
+    font-size: 14px;
+    color: #ffe084;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.quest-panel__progress-bar {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(108, 224, 255, 0.3);
+}
+
+.quest-panel__progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6ce0ff 0%, #ffe084 100%);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+/* Quest List */
+.quest-panel__list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 24px;
+}
+
+.quest-panel__section {
+    margin-bottom: 24px;
+}
+
+.quest-panel__section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #6ce0ff;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Quest Card */
+.quest-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(108, 224, 255, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.quest-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #6ce0ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 224, 255, 0.2);
+}
+
+.quest-card--active {
+    background: rgba(108, 224, 255, 0.1);
+    border-color: #6ce0ff;
+    box-shadow: 0 0 16px rgba(108, 224, 255, 0.3);
+}
+
+.quest-card--completed {
+    opacity: 0.7;
+    cursor: default;
+    border-color: rgba(141, 221, 145, 0.5);
+}
+
+.quest-card--completed:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Quest Icon */
+.quest-card__icon {
+    font-size: 32px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(108, 224, 255, 0.1);
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.quest-card--completed .quest-card__icon {
+    background: rgba(141, 221, 145, 0.2);
+}
+
+/* Quest Content */
+.quest-card__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.quest-card__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 4px 0;
+}
+
+.quest-card__description {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+}
+
+/* Quest Progress */
+.quest-card__progress {
+    margin-bottom: 12px;
+}
+
+.quest-card__progress-text {
+    font-size: 12px;
+    color: #ffe084;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.quest-card__progress-bar {
+    height: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid rgba(108, 224, 255, 0.3);
+}
+
+.quest-card__progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6ce0ff 0%, #ffe084 100%);
+    border-radius: 3px;
+}
+
+/* Quest Reward */
+.quest-card__reward {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+}
+
+.quest-card__reward-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.quest-card__reward-value {
+    color: #ffe084;
+    font-weight: 600;
+}
+
+/* Empty State */
+.quest-panel__empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.quest-panel__empty p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+/* Scrollbar Styling */
+.quest-panel__list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.quest-panel__list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.quest-panel__list::-webkit-scrollbar-thumb {
+    background: rgba(108, 224, 255, 0.3);
+    border-radius: 4px;
+}
+
+.quest-panel__list::-webkit-scrollbar-thumb:hover {
+    background: rgba(108, 224, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .quest-panel {
+        max-width: 100%;
+        max-height: 90vh;
+    }
+
+    .quest-panel__header {
+        padding: 16px 20px;
+    }
+
+    .quest-panel__title {
+        font-size: 24px;
+    }
+
+    .quest-card {
+        padding: 12px;
+    }
+
+    .quest-card__icon {
+        font-size: 28px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .quest-card__title {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,56 @@
+/**
+ * Day Transition Styles
+ * 
+ * Full-screen overlay for day transition effect.
+ */
+
+.day-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.day-transition__content {
+    text-align: center;
+}
+
+.day-transition__title {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #FFE084;
+    text-shadow: 0 0 20px rgba(139, 115, 85, 0.5), 0 0 40px rgba(58, 32, 16, 0.8);
+    margin: 0;
+    font-family: 'Brother 1816', sans-serif;
+}
+
+/* Responsive sizing */
+@media (max-width: 768px) {
+    .day-transition__title {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .day-transition__title {
+        font-size: 2rem;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .day-transition {
+        transition: none;
+    }
+
+    .day-transition__content {
+        animation: none;
+    }
+}

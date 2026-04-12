@@ -1,0 +1,221 @@
+.inventory {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.inventory__content {
+    background: rgba(18, 24, 38, 0.9);
+    border: 2px solid rgba(108, 224, 255, 0.3);
+    border-radius: 12px;
+    padding: 16px 20px;
+    min-width: 180px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.inventory__section {
+    margin-bottom: 16px;
+}
+
+.inventory__section:last-child {
+    margin-bottom: 0;
+}
+
+.inventory__section-title {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+/* Day & Time */
+.inventory__day {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.inventory__day-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.inventory__day-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #6ce0ff;
+    line-height: 1;
+}
+
+.inventory__time {
+    margin-bottom: 12px;
+}
+
+.inventory__time-label {
+    font-size: 16px;
+    color: #ffe084;
+    font-weight: 500;
+}
+
+.inventory__progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.inventory__progress-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.inventory__progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6ce0ff, #ffe084);
+    border-radius: 4px;
+    transition: width 0.3s ease-out;
+}
+
+.inventory__progress-text {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    min-width: 45px;
+    text-align: right;
+}
+
+/* Coins */
+.inventory__coins {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+}
+
+.inventory__coin-icon {
+    font-size: 24px;
+}
+
+.inventory__coin-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffe084;
+}
+
+/* Seeds */
+.inventory__seeds {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.inventory__seed-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.2s ease;
+    pointer-events: auto;
+}
+
+.inventory__seed-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-2px);
+}
+
+.inventory__seed-item:active {
+    transform: scale(0.98);
+}
+
+.inventory__seed-item--selected {
+    background: rgba(108, 224, 255, 0.2);
+    border: 1px solid rgba(108, 224, 255, 0.5);
+    box-shadow: 0 0 8px rgba(108, 224, 255, 0.3);
+}
+
+.inventory__seed-icon {
+    font-size: 20px;
+}
+
+.inventory__seed-count {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-left: auto;
+}
+
+/* Harvested Items */
+.inventory__harvested {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.inventory__harvested-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.2s ease;
+    pointer-events: auto;
+}
+
+.inventory__harvested-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-2px);
+}
+
+.inventory__harvested-item:active {
+    transform: scale(0.98);
+}
+
+.inventory__harvested-icon {
+    font-size: 20px;
+}
+
+.inventory__harvested-count {
+    font-size: 16px;
+    font-weight: 600;
+    color: #6ce0ff;
+    margin-left: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .inventory {
+        top: 12px;
+        right: 12px;
+    }
+
+    .inventory__content {
+        padding: 12px 16px;
+        min-width: 150px;
+    }
+
+    .inventory__coin-icon,
+    .inventory__coin-value {
+        font-size: 20px;
+    }
+
+    .inventory__seed-icon,
+    .inventory__harvested-icon {
+        font-size: 18px;
+    }
+
+    .inventory__seed-count,
+    .inventory__harvested-count {
+        font-size: 14px;
+    }
+}

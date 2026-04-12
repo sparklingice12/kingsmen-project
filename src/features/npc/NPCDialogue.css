@@ -1,0 +1,188 @@
+.npc-dialogue-container {
+    position: fixed;
+    bottom: 280px;
+    right: 200px;
+    transform: none;
+    z-index: 1000;
+    pointer-events: auto;
+}
+
+.npc-dialogue-bubble {
+    position: relative;
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    background: linear-gradient(to bottom, #5a4030, #3a2515);
+    border: 3px solid #b09060;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    max-width: 400px;
+    min-width: 300px;
+    backdrop-filter: blur(8px);
+}
+
+.npc-avatar {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(176, 144, 96, 0.2);
+    border: 2px solid #b09060;
+    border-radius: 8px;
+    font-size: 28px;
+}
+
+.avatar-emoji {
+    display: block;
+    line-height: 1;
+}
+
+.dialogue-content {
+    flex: 1;
+    position: relative;
+    padding-right: 24px;
+}
+
+.dialogue-title {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #e8d5b0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.5px;
+}
+
+.dialogue-message {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #c4a06a;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.dialogue-close-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: linear-gradient(to bottom, #8B7355, #6B5345);
+    border: 2px solid #b09060;
+    border-radius: 50%;
+    color: #e8d5b0;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.dialogue-close-btn:hover {
+    background: linear-gradient(to bottom, #9B8365, #7B6355);
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.dialogue-close-btn:active {
+    transform: scale(0.95);
+}
+
+/* Speech bubble tail pointing down */
+.speech-bubble-tail {
+    position: absolute;
+    bottom: -12px;
+    left: 85%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid #3a2515;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .npc-dialogue-bubble {
+        min-width: 280px;
+        max-width: 90vw;
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .npc-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
+
+    .dialogue-title {
+        font-size: 14px;
+    }
+
+    .dialogue-message {
+        font-size: 12px;
+    }
+
+    .dialogue-close-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+    }
+}
+
+/* Animation for dialogue appearance */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.npc-dialogue-bubble {
+    animation: slideUp 0.3s ease-out;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+    .npc-dialogue-container,
+    .npc-dialogue-bubble,
+    .dialogue-close-btn {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Quest Progress Bar in Dialogue */
+.dialogue-quest-progress {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(176, 144, 96, 0.3);
+}
+
+.dialogue-progress-bar {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(176, 144, 96, 0.5);
+}
+
+.dialogue-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6ce0ff 0%, #ffe084 100%);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}

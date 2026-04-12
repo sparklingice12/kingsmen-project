@@ -40,14 +40,15 @@ export const LanguageSwitcherScreen = ({ onStart, mode = 'SOIL' }) => {
 
                 {/* Title Section */}
                 <div className="text-center mb-16 relative z-10">
-                    <motion.img
-                        src="/space-garden-splash-logo.png"
-                        alt="Space Garden"
+                    <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 1, type: "spring" }}
-                        className=" w-full max-w-[1265px] mx-auto mb-4 drop-shadow-2xl"
-                    />
+                        className="mb-4"
+                    >
+                        <h1 className="text-8xl font-bold text-white mb-4 drop-shadow-2xl">🌾 Heritage Harvest</h1>
+                        <p className="text-3xl text-white/90 drop-shadow-lg">Museum Farming Experience</p>
+                    </motion.div>
                 </div>
 
                 {/* Language Selection */}

@@ -1,0 +1,377 @@
+.educational-modal__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    padding: 20px;
+    pointer-events: auto;
+}
+
+.educational-modal__content {
+    position: relative;
+    background: linear-gradient(135deg, #3a2010 0%, #2a1810 100%);
+    border: 3px solid #8B7355;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.educational-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(139, 115, 85, 0.3);
+    color: #FFE084;
+    font-size: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.educational-modal__close:hover {
+    background: rgba(220, 53, 69, 0.5);
+    border-color: #dc3545;
+    color: white;
+    transform: scale(1.1);
+}
+
+.educational-modal__close:active {
+    transform: scale(0.95);
+}
+
+.educational-modal__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 32px 32px 24px;
+    border-bottom: 2px solid rgba(139, 115, 85, 0.4);
+}
+
+.educational-modal__icon {
+    font-size: 64px;
+    line-height: 1;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+}
+
+.educational-modal__title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #FFE084;
+    margin: 0;
+    flex: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.educational-modal__body {
+    padding: 32px;
+}
+
+.educational-modal__description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #D4C5A9;
+    margin: 0 0 24px;
+}
+
+.educational-modal__facts {
+    background: rgba(255, 224, 132, 0.1);
+    border: 1px solid rgba(255, 224, 132, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.educational-modal__facts-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffe084;
+    margin: 0 0 16px;
+}
+
+.educational-modal__facts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.educational-modal__fact {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #D4C5A9;
+}
+
+.educational-modal__fact-bullet {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.educational-modal__footer {
+    padding: 24px 32px 32px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.educational-modal__button {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #FFE084 0%, #FFD666 100%);
+    color: #2a1810;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(255, 224, 132, 0.4);
+}
+
+.educational-modal__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 224, 132, 0.6);
+    background: linear-gradient(135deg, #FFE84D 0%, #FFD84D 100%);
+}
+
+.educational-modal__button:active {
+    transform: translateY(0);
+}
+
+.educational-modal__button--secondary {
+    background: linear-gradient(135deg, #8B7355 0%, #6B5345 100%);
+    color: #FFE084;
+    box-shadow: 0 4px 12px rgba(139, 115, 85, 0.4);
+}
+
+.educational-modal__button--secondary:hover {
+    box-shadow: 0 6px 16px rgba(139, 115, 85, 0.6);
+    background: linear-gradient(135deg, #A08365 0%, #8B7355 100%);
+}
+
+/* Scrollbar styling */
+.educational-modal__content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.educational-modal__content::-webkit-scrollbar-track {
+    background: rgba(139, 115, 85, 0.2);
+    border-radius: 4px;
+}
+
+.educational-modal__content::-webkit-scrollbar-thumb {
+    background: rgba(139, 115, 85, 0.6);
+    border-radius: 4px;
+}
+
+.educational-modal__content::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 115, 85, 0.8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .educational-modal__backdrop {
+        padding: 12px;
+    }
+
+    .educational-modal__content {
+        max-height: 90vh;
+    }
+
+    .educational-modal__header {
+        padding: 24px 24px 20px;
+        gap: 12px;
+    }
+
+    .educational-modal__icon {
+        font-size: 48px;
+    }
+
+    .educational-modal__title {
+        font-size: 24px;
+    }
+
+    .educational-modal__body {
+        padding: 24px;
+    }
+
+    .educational-modal__description {
+        font-size: 16px;
+    }
+
+    .educational-modal__facts-title {
+        font-size: 18px;
+    }
+
+    .educational-modal__fact {
+        font-size: 14px;
+    }
+
+    .educational-modal__footer {
+        padding: 20px 24px 24px;
+    }
+
+    .educational-modal__button {
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+}
+
+/* Growth Stage Information */
+.educational-modal__growth-info {
+    background: rgba(255, 224, 132, 0.1);
+    border: 1px solid rgba(255, 224, 132, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.educational-modal__section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffe084;
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.educational-modal__growth-stages {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.educational-modal__growth-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 8px;
+    background: rgba(139, 115, 85, 0.2);
+    border: 2px solid rgba(139, 115, 85, 0.3);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.educational-modal__growth-stage.completed {
+    background: rgba(255, 224, 132, 0.2);
+    border-color: rgba(255, 224, 132, 0.5);
+}
+
+.educational-modal__growth-stage.current {
+    background: rgba(255, 224, 132, 0.3);
+    border-color: rgba(255, 224, 132, 0.8);
+    box-shadow: 0 0 12px rgba(255, 224, 132, 0.4);
+}
+
+.educational-modal__stage-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.educational-modal__stage-label {
+    font-size: 12px;
+    color: #D4C5A9;
+    font-weight: 500;
+}
+
+.educational-modal__growth-status {
+    text-align: center;
+    font-size: 16px;
+    color: #D4C5A9;
+    margin: 0;
+}
+
+.educational-modal__ready {
+    color: #ffe084;
+    font-weight: 600;
+}
+
+/* Educational Sections */
+.educational-modal__section {
+    margin-bottom: 20px;
+    padding: 16px;
+    background: rgba(139, 115, 85, 0.15);
+    border-left: 3px solid rgba(255, 224, 132, 0.5);
+    border-radius: 8px;
+}
+
+.educational-modal__section-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #D4C5A9;
+    margin: 0;
+}
+
+/* Chicken-specific styles */
+.educational-modal__chicken-info {
+    background: rgba(255, 224, 132, 0.1);
+    border: 1px solid rgba(255, 224, 132, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.educational-modal__chicken-status {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.educational-modal__chicken-status p {
+    font-size: 16px;
+    color: #D4C5A9;
+    margin: 0;
+}
+
+.educational-modal__button--feed {
+    background: linear-gradient(135deg, #8DDD91, #6bc96f);
+    color: #2a1810;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(141, 221, 145, 0.3);
+    width: 100%;
+}
+
+.educational-modal__button--feed:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(141, 221, 145, 0.4);
+    background: linear-gradient(135deg, #9FE8A3, #7DD981);
+}
+
+.educational-modal__button--feed:active {
+    transform: translateY(0);
+}
+
+.educational-modal__fed-message {
+    padding: 12px;
+    background: rgba(141, 221, 145, 0.2);
+    border: 1px solid rgba(141, 221, 145, 0.4);
+    border-radius: 8px;
+    color: #8DDD91;
+    font-weight: 500;
+    text-align: center;
+}
