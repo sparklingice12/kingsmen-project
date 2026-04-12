@@ -205,33 +205,33 @@ function HeritageHarvestGame() {
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="absolute top-4 left-4 backdrop-blur-sm rounded-xl px-5 py-4 space-y-2 shadow-2xl border-2"
-                        style={{ backgroundColor: 'rgba(58, 37, 24, 0.95)', borderColor: '#b09060' }}
+                        className="absolute top-2 left-2 sm:top-4 sm:left-4 backdrop-blur-sm rounded-xl px-3 py-2 sm:px-5 sm:py-4 space-y-1 sm:space-y-2 shadow-2xl border-2 max-w-[180px] sm:max-w-none"
+                        style={{ backgroundColor: 'rgba(58, 37, 24, 0.95)', borderColor: '#b09060', maxHeight: 'calc(100vh - 16px)', overflowY: 'auto' }}
                     >
-                        <div className="flex items-center gap-2 pb-2 border-b" style={{ borderColor: 'rgba(176, 144, 96, 0.4)' }}>
+                        <div className="flex items-center gap-2 pb-1 sm:pb-2 border-b" style={{ borderColor: 'rgba(176, 144, 96, 0.4)' }}>
                             <div className="flex-1">
-                                <p className="text-xl font-bold" style={{ color: '#e8d5b0' }}>Day {currentDay}</p>
-                                <p className="text-sm" style={{ color: '#b09060' }}>💰 {coins} Coins</p>
-                                <p className="text-xs mt-1" style={{ color: '#8a7050' }}>
+                                <p className="text-base sm:text-xl font-bold" style={{ color: '#e8d5b0' }}>Day {currentDay}</p>
+                                <p className="text-xs sm:text-sm" style={{ color: '#b09060' }}>💰 {coins} Coins</p>
+                                <p className="text-[10px] sm:text-xs mt-0.5 sm:mt-1" style={{ color: '#8a7050' }}>
                                     {timeIcon} {timeString}
                                 </p>
 
-                                <p className="text-xs font-semibold mt-2" style={{ color: '#c4a06a' }}>
+                                <p className="text-[10px] sm:text-xs font-semibold mt-1 sm:mt-2" style={{ color: '#c4a06a' }}>
                                     {timeOfDay < 0.25 ? '🌅 Morning' :
                                         timeOfDay < 0.5 ? '☀️ Midday' :
                                             timeOfDay < 0.75 ? '🌤️ Afternoon' :
                                                 '🌆 Evening'}
                                 </p>
 
-                                <div className="mt-2">
-                                    <div className="flex items-center gap-2">
-                                        <div className="flex-1 h-2 rounded-full overflow-hidden border" style={{ backgroundColor: 'rgba(30, 18, 10, 0.6)', borderColor: 'rgba(176, 144, 96, 0.3)' }}>
+                                <div className="mt-1 sm:mt-2">
+                                    <div className="flex items-center gap-1 sm:gap-2">
+                                        <div className="flex-1 h-1.5 sm:h-2 rounded-full overflow-hidden border" style={{ backgroundColor: 'rgba(30, 18, 10, 0.6)', borderColor: 'rgba(176, 144, 96, 0.3)' }}>
                                             <div
                                                 className="h-full transition-all duration-300"
                                                 style={{ width: `${(timeOfDay * 100).toFixed(1)}%`, background: 'linear-gradient(to right, #b09060, #c4a06a)' }}
                                             />
                                         </div>
-                                        <span className="text-xs font-mono min-w-[3rem]" style={{ color: '#b09060' }}>
+                                        <span className="text-[10px] sm:text-xs font-mono min-w-[2rem] sm:min-w-[3rem]" style={{ color: '#b09060' }}>
                                             {(timeOfDay * 100).toFixed(0)}%
                                         </span>
                                     </div>
@@ -239,34 +239,34 @@ function HeritageHarvestGame() {
                             </div>
                         </div>
 
-                        <div className="text-xs space-y-1">
-                            <p className="font-semibold mb-1" style={{ color: '#c4a06a' }}>🌱 Seeds Available:</p>
-                            <div className="grid grid-cols-2 gap-2">
-                                <div className="rounded px-2 py-1" style={{ backgroundColor: 'rgba(46, 26, 14, 0.6)', color: '#e8d5b0' }}>
+                        <div className="text-[10px] sm:text-xs space-y-1">
+                            <p className="font-semibold mb-0.5 sm:mb-1" style={{ color: '#c4a06a' }}>🌱 Seeds:</p>
+                            <div className="grid grid-cols-2 gap-1 sm:gap-2">
+                                <div className="rounded px-1.5 py-0.5 sm:px-2 sm:py-1" style={{ backgroundColor: 'rgba(46, 26, 14, 0.6)', color: '#e8d5b0' }}>
                                     <span>🫘</span> {seeds.bean}
                                 </div>
-                                <div className="rounded px-2 py-1" style={{ backgroundColor: 'rgba(46, 26, 14, 0.6)', color: '#e8d5b0' }}>
+                                <div className="rounded px-1.5 py-0.5 sm:px-2 sm:py-1" style={{ backgroundColor: 'rgba(46, 26, 14, 0.6)', color: '#e8d5b0' }}>
                                     <span>🌾</span> {seeds.wheat}
                                 </div>
-                                <div className="rounded px-2 py-1" style={{ backgroundColor: 'rgba(46, 26, 14, 0.6)', color: '#e8d5b0' }}>
+                                <div className="rounded px-1.5 py-0.5 sm:px-2 sm:py-1" style={{ backgroundColor: 'rgba(46, 26, 14, 0.6)', color: '#e8d5b0' }}>
                                     <span>🍅</span> {seeds.tomato}
                                 </div>
-                                <div className="rounded px-2 py-1" style={{ backgroundColor: 'rgba(46, 26, 14, 0.6)', color: '#e8d5b0' }}>
+                                <div className="rounded px-1.5 py-0.5 sm:px-2 sm:py-1" style={{ backgroundColor: 'rgba(46, 26, 14, 0.6)', color: '#e8d5b0' }}>
                                     <span>🥕</span> {seeds.carrot}
                                 </div>
                             </div>
                         </div>
 
                         {/* Harvested Items - Always show eggs */}
-                        <div className="text-xs space-y-1 pt-2 border-t" style={{ borderColor: 'rgba(176, 144, 96, 0.4)' }}>
-                            <p className="font-semibold mb-1" style={{ color: '#c4a06a' }}>🥚 Inventory:</p>
-                            <div className="rounded px-2 py-1" style={{ backgroundColor: 'rgba(46, 26, 14, 0.6)', color: '#e8d5b0' }}>
+                        <div className="text-[10px] sm:text-xs space-y-1 pt-1 sm:pt-2 border-t" style={{ borderColor: 'rgba(176, 144, 96, 0.4)' }}>
+                            <p className="font-semibold mb-0.5 sm:mb-1" style={{ color: '#c4a06a' }}>🥚 Inventory:</p>
+                            <div className="rounded px-1.5 py-0.5 sm:px-2 sm:py-1" style={{ backgroundColor: 'rgba(46, 26, 14, 0.6)', color: '#e8d5b0' }}>
                                 <span>🥚</span> Eggs: {harvested.egg}
                             </div>
                         </div>
 
-                        <div className="text-xs space-y-1 pt-2 border-t" style={{ borderColor: 'rgba(176, 144, 96, 0.4)' }}>
-                            <p className="font-semibold" style={{ color: '#c4a06a' }}>📊 Farm Status:</p>
+                        <div className="text-[10px] sm:text-xs space-y-0.5 sm:space-y-1 pt-1 sm:pt-2 border-t" style={{ borderColor: 'rgba(176, 144, 96, 0.4)' }}>
+                            <p className="font-semibold" style={{ color: '#c4a06a' }}>📊 Farm:</p>
                             <div className="space-y-0.5" style={{ color: '#e8d5b0' }}>
                                 <p>🟫 Untilled: {farmStats.untilled}</p>
                                 <p>🟤 Tilled: {farmStats.tilled}</p>
@@ -277,26 +277,26 @@ function HeritageHarvestGame() {
 
                         <button
                             onClick={() => useStore.getState().ui.openGameModal('codex', null)}
-                            className="w-full mt-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 border-2 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+                            className="w-full mt-1 sm:mt-2 px-2 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold text-[10px] sm:text-sm transition-all duration-200 flex items-center justify-center gap-1 sm:gap-2 border-2 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
                             style={{ background: 'linear-gradient(to right, #4a3020, #3a2515)', borderColor: '#b09060', color: '#e8d5b0' }}
                         >
-                            <span className="text-lg">📚</span>
-                            <span>Heritage Codex</span>
+                            <span className="text-sm sm:text-lg">📚</span>
+                            <span>Codex</span>
                         </button>
 
                         <button
                             onClick={() => useStore.getState().ui.openGameModal('shop', null)}
-                            className="w-full mt-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 border-2 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+                            className="w-full mt-1 sm:mt-2 px-2 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold text-[10px] sm:text-sm transition-all duration-200 flex items-center justify-center gap-1 sm:gap-2 border-2 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
                             style={{ background: 'linear-gradient(to right, #4a3020, #3a2515)', borderColor: '#b09060', color: '#e8d5b0' }}
                         >
-                            <span className="text-lg">🏪</span>
-                            <span>Seed Shop</span>
+                            <span className="text-sm sm:text-lg">🏪</span>
+                            <span>Shop</span>
                         </button>
 
                         {/* Audio Toggle */}
-                        <div className="mt-2">
+                        <div className="mt-1 sm:mt-2">
                             <AudioToggle
-                                className="w-full px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 border-2 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+                                className="w-full px-2 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold text-[10px] sm:text-sm transition-all duration-200 flex items-center justify-center gap-1 sm:gap-2 border-2 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
                                 style={{ background: 'linear-gradient(to right, #4a3020, #3a2515)', borderColor: '#b09060', color: '#e8d5b0' }}
                             />
                         </div>

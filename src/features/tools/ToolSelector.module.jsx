@@ -29,12 +29,12 @@ function ToolSelector() {
     };
 
     return (
-        <div className="fixed top-1/2 right-4 transform -translate-y-1/2 pointer-events-auto z-50">
+        <div className="fixed top-1/2 right-2 sm:right-4 transform -translate-y-1/2 pointer-events-auto z-50">
             <motion.div
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
-                className="flex flex-col gap-3 backdrop-blur-sm rounded-2xl px-3 py-4 shadow-2xl border-2"
+                className="flex flex-col gap-2 sm:gap-3 backdrop-blur-sm rounded-2xl px-2 py-2 sm:px-3 sm:py-4 shadow-2xl border-2"
                 style={{ backgroundColor: 'rgba(58, 37, 24, 0.95)', borderColor: '#b09060' }}
             >
                 {tools.map((tool) => {
@@ -48,7 +48,7 @@ function ToolSelector() {
                             whileTap={{ scale: 0.95 }}
                             className={`
                                 relative flex flex-col items-center justify-center
-                                w-20 h-20 rounded-xl transition-all duration-200 border-2
+                                w-14 h-14 sm:w-20 sm:h-20 rounded-xl transition-all duration-200 border-2
                                 ${isSelected ? 'shadow-lg border-[#b09060]' : 'hover:opacity-90 border-[#4a3020]'}
                             `}
                             style={{
@@ -59,16 +59,16 @@ function ToolSelector() {
                                 <img
                                     src={tool.iconImage}
                                     alt={tool.name}
-                                    className="w-14 h-14 mb-0.5 object-cover"
+                                    className="w-10 h-10 sm:w-14 sm:h-14 mb-0.5 object-cover"
                                     style={{
                                         imageRendering: 'pixelated',
                                         transform: (tool.id === 'hoe' || tool.id === 'watering_can') ? 'scale(1.3)' : 'scale(1)'
                                     }}
                                 />
                             ) : (
-                                <span className="text-2xl mb-0.5">{tool.icon}</span>
+                                <span className="text-xl sm:text-2xl mb-0.5">{tool.icon}</span>
                             )}
-                            <span className={`text-[10px] font-semibold leading-tight ${isSelected ? 'text-[#e8d5b0]' : 'text-[#b09060]'}`}>
+                            <span className={`text-[8px] sm:text-[10px] font-semibold leading-tight ${isSelected ? 'text-[#e8d5b0]' : 'text-[#b09060]'}`}>
                                 {tool.name}
                             </span>
                             {isSelected && (

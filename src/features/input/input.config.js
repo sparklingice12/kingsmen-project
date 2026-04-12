@@ -4,19 +4,35 @@
  * Defines input system settings for the virtual joystick and touch controls.
  */
 
+// Get responsive joystick size based on screen width
+const getJoystickSize = () => {
+    if (typeof window === 'undefined') return { outer: 60, inner: 25, max: 50 };
+
+    const width = window.innerWidth;
+    if (width < 640) { // Mobile
+        return { outer: 50, inner: 20, max: 40 };
+    } else if (width < 1024) { // Tablet
+        return { outer: 55, inner: 22, max: 45 };
+    } else { // Desktop
+        return { outer: 60, inner: 25, max: 50 };
+    }
+};
+
+const joystickSize = getJoystickSize();
+
 export const INPUT_CONFIG = {
     // Virtual Joystick Settings
     JOYSTICK: {
         // Position (bottom-left corner)
         POSITION: {
-            bottom: 40,
-            left: 40,
+            bottom: 20,
+            left: 20,
         },
 
-        // Sizes
-        OUTER_RADIUS: 60, // Outer circle radius in pixels
-        INNER_RADIUS: 25, // Inner circle (knob) radius in pixels
-        MAX_DISTANCE: 50, // Maximum distance the knob can move from center
+        // Sizes (responsive)
+        OUTER_RADIUS: joystickSize.outer, // Outer circle radius in pixels
+        INNER_RADIUS: joystickSize.inner, // Inner circle (knob) radius in pixels
+        MAX_DISTANCE: joystickSize.max, // Maximum distance the knob can move from center
 
         // Visual styling
         OUTER_COLOR: 'rgba(255, 255, 255, 0.3)',

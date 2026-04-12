@@ -42,14 +42,14 @@ function SeedSelector() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 100 }}
                     transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                    className="fixed top-1/2 right-32 transform -translate-y-1/2 pointer-events-auto z-40"
+                    className="fixed top-1/2 right-20 sm:right-32 transform -translate-y-1/2 pointer-events-auto z-40"
                 >
-                    <div className="bg-amber-900/95 backdrop-blur-sm rounded-xl px-4 py-3 shadow-2xl border-2 border-amber-700">
-                        <p className="text-xs font-semibold text-amber-200 mb-2 text-center">
+                    <div className="bg-amber-900/95 backdrop-blur-sm rounded-xl px-3 py-2 sm:px-4 sm:py-3 shadow-2xl border-2 border-amber-700">
+                        <p className="text-[10px] sm:text-xs font-semibold text-amber-200 mb-1 sm:mb-2 text-center">
                             Choose Seed
                         </p>
 
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-1.5 sm:gap-2">
                             {crops.map((crop) => {
                                 const seedCount = seeds[crop.id] || 0;
                                 const isSelected = selectedSeed === crop.id;
@@ -63,8 +63,8 @@ function SeedSelector() {
                                         whileHover={!isDisabled ? { scale: 1.05 } : {}}
                                         whileTap={!isDisabled ? { scale: 0.95 } : {}}
                                         className={`
-                                            relative flex items-center gap-2
-                                            px-3 py-2 rounded-lg
+                                            relative flex items-center gap-1.5 sm:gap-2
+                                            px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg
                                             transition-all duration-200
                                             ${isSelected && !isDisabled
                                                 ? 'bg-green-600 shadow-lg border-2 border-green-400'
@@ -75,14 +75,14 @@ function SeedSelector() {
                                         `}
                                     >
                                         {/* Crop Icon */}
-                                        <span className="text-2xl">{crop.icon}</span>
+                                        <span className="text-xl sm:text-2xl">{crop.icon}</span>
 
                                         {/* Crop Info */}
                                         <div className="flex-1 text-left">
-                                            <p className={`text-xs font-semibold ${isDisabled ? 'text-gray-400' : 'text-amber-100'}`}>
+                                            <p className={`text-[10px] sm:text-xs font-semibold ${isDisabled ? 'text-gray-400' : 'text-amber-100'}`}>
                                                 {crop.name}
                                             </p>
-                                            <p className={`text-[10px] ${isDisabled ? 'text-gray-500' : 'text-amber-300'}`}>
+                                            <p className={`text-[8px] sm:text-[10px] ${isDisabled ? 'text-gray-500' : 'text-amber-300'}`}>
                                                 {seedCount} seeds
                                             </p>
                                         </div>
@@ -102,7 +102,7 @@ function SeedSelector() {
 
                                         {/* Out of Seeds Badge */}
                                         {isDisabled && (
-                                            <span className="text-[10px] text-red-400 font-bold">
+                                            <span className="text-[8px] sm:text-[10px] text-red-400 font-bold">
                                                 OUT
                                             </span>
                                         )}
@@ -112,7 +112,7 @@ function SeedSelector() {
                         </div>
 
                         {/* Helper Text */}
-                        <p className="text-[10px] text-amber-400 mt-2 text-center">
+                        <p className="text-[8px] sm:text-[10px] text-amber-400 mt-1 sm:mt-2 text-center">
                             Click watered soil to plant
                         </p>
                     </div>
