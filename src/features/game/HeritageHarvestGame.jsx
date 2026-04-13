@@ -13,7 +13,8 @@ import { useQuestIntegration, QuestCompletionNotification } from '@/features/que
 import { useAudio } from '@/features/audio/hooks/useAudio';
 import { SettingsModal } from '@/features/settings';
 import AudioToggle from '@/features/audio/components/AudioToggle';
-import { motion } from 'framer-motion';
+import { AttractMode, useInactivityDetection, AutoReset } from '@/features/kiosk';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 /**
@@ -26,6 +27,8 @@ import { useEffect, useState } from 'react';
  */
 function HeritageHarvestGame() {
     const isPlaying = useStore((s) => s.game.isPlaying);
+    const attractMode = useStore((s) => s.game.attractMode);
+    const setAttractMode = useStore((s) => s.game.setAttractMode);
     const currentDay = useStore((s) => s.game.currentDay);
     const timeOfDay = useStore((s) => s.game.timeOfDay); // Add this to trigger re-render
     const modalOpen = useStore((s) => s.ui.modalOpen);
@@ -44,6 +47,30 @@ function HeritageHarvestGame() {
 
     // Audio integration - manages background music and sound effects
     const { initialize: initializeAudio } = useAudio();
+
+    // Inactivity detection for attract mode (only when game is playing)
+    const { isInactive, resetTimer } = useInactivityDetection({
+        enabled: isPlaying && !modalOpen && !attractMode,
+        timeout: 30000, // 30 seconds as per requirements
+        onInactive: () => {
+            setAttractMode(true);
+        },
+    });
+
+    // Handle exiting attract mode
+    const handleExitAttractMode = () => {
+        // Exit attract mode first
+        setAttractMode(false);
+
+        // Then start the game (this will set isPlaying to true)
+        useStore.getState().game.startGame();
+
+        // Reset the inactivity timer
+        resetTimer();
+
+        // Start a new session when exiting attract mode (requirement 3.1.5)
+        useStore.getState().session.startSession();
+    };
 
     // Initialize audio on first user interaction
     useEffect(() => {
@@ -88,6 +115,15 @@ function HeritageHarvestGame() {
     // Determine if day or night (for sun/moon icon)
     const isDaytime = hours >= 6 && hours < 18; // 6 AM to 6 PM is day
     const timeIcon = isDaytime ? '☀️' : '🌙';
+
+    // Show attract mode if active
+    if (attractMode) {
+        return (
+            <AnimatePresence>
+                <AttractMode onExit={handleExitAttractMode} />
+            </AnimatePresence>
+        );
+    }
 
     if (!isPlaying) {
         return (
@@ -315,6 +351,9 @@ function HeritageHarvestGame() {
             <SettingsModal />
             {modalOpen === 'shop' && <Shop />}
             {modalOpen === 'day-summary' && <DaySummary />}
+
+            {/* Auto-reset system - shows warning modal when inactivity detected */}
+            <AutoReset />
 
             {/* Only show NPC dialogue after loading */}
             {!isLoading && <NPCDialogue />}

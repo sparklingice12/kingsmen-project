@@ -51,14 +51,14 @@ function EducationalModal() {
     // Pause game when modal is open
     useEffect(() => {
         if (modalOpen === 'educational' && (cropId || type === 'chicken')) {
-            pauseGame();
+            if (pauseGame) pauseGame();
 
             // Track modal view in analytics
-            if (cropId) {
+            if (cropId && trackModalView) {
                 trackModalView(cropId);
             }
         } else {
-            resumeGame();
+            if (resumeGame) resumeGame();
         }
     }, [modalOpen, cropId, type, pauseGame, resumeGame, trackModalView]);
 

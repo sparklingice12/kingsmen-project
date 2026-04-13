@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { useStore } from '@/state/store';
 import { INPUT_CONFIG } from './input.config';
 
 /**
@@ -19,6 +20,9 @@ function VirtualJoystick() {
     const centerRef = useRef({ x: 0, y: 0 });
 
     const { JOYSTICK } = INPUT_CONFIG;
+
+    // Track user interactions for auto-reset system
+    const updateInteraction = useStore((s) => s.session.updateInteraction);
 
     // Calculate center position on mount and resize
     useEffect(() => {
@@ -67,7 +71,8 @@ function VirtualJoystick() {
 
     // Handle touch start
     const handleTouchStart = useCallback((e) => {
-        e.preventDefault();
+        updateInteraction(); // Track interaction for auto-reset
+
         const touch = e.touches[0];
         touchIdRef.current = touch.identifier;
         setIsActive(true);
@@ -90,11 +95,10 @@ function VirtualJoystick() {
 
         const direction = calculateDirection(deltaX, deltaY);
         emitDirection(direction);
-    }, [JOYSTICK.MAX_DISTANCE, calculateDirection, emitDirection]);
+    }, [JOYSTICK.MAX_DISTANCE, calculateDirection, emitDirection, updateInteraction]);
 
     // Handle touch move
     const handleTouchMove = useCallback((e) => {
-        e.preventDefault();
         if (!isActive) return;
 
         const touch = Array.from(e.touches).find(
@@ -125,7 +129,6 @@ function VirtualJoystick() {
 
     // Handle touch end
     const handleTouchEnd = useCallback((e) => {
-        e.preventDefault();
         const touch = Array.from(e.changedTouches).find(
             (t) => t.identifier === touchIdRef.current
         );
@@ -141,7 +144,8 @@ function VirtualJoystick() {
 
     // Mouse events for desktop testing
     const handleMouseDown = useCallback((e) => {
-        e.preventDefault();
+        updateInteraction(); // Track interaction for auto-reset
+
         setIsActive(true);
 
         const rect = outerRef.current.getBoundingClientRect();
@@ -165,7 +169,7 @@ function VirtualJoystick() {
 
         const direction = calculateDirection(deltaX, deltaY);
         emitDirection(direction);
-    }, [JOYSTICK.MAX_DISTANCE, calculateDirection, emitDirection]);
+    }, [JOYSTICK.MAX_DISTANCE, calculateDirection, emitDirection, updateInteraction]);
 
     const handleMouseMove = useCallback((e) => {
         if (!isActive) return;

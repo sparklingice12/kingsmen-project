@@ -3,6 +3,7 @@ import { useStore } from '@/state/store';
 import { EndSessionConfirmation } from '@/components/shared/EndSessionConfirmation';
 import { HeritageHarvestGame } from '@/features/game';
 import { EducationalModal } from '@/features/education';
+import { AdminPanel, useAdminPanel } from '@/features/kiosk';
 import { Leva, useControls } from 'leva';
 import { useDebugMode } from '@/features/debug/useDebugMode';
 
@@ -10,6 +11,7 @@ import { useDebugMode } from '@/features/debug/useDebugMode';
 export default function App() {
     const { modal, closeModal } = useStore((s) => s.ui);
     const isDebugMode = useDebugMode();
+    const { isOpen: isAdminOpen, closePanel: closeAdminPanel } = useAdminPanel();
 
     // Registers a test control so the Leva panel has something to render
     useControls('Debug', () => isDebugMode ? {
@@ -37,6 +39,12 @@ export default function App() {
                         onCancel={closeModal}
                     />
                 </AnimatePresence>
+
+                {/* Admin Panel - Hidden, accessed via Ctrl+Shift+A */}
+                <AdminPanel
+                    isOpen={isAdminOpen}
+                    onClose={closeAdminPanel}
+                />
             </div>
         </>
     );

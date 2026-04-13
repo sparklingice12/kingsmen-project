@@ -34,37 +34,37 @@
             }
         },
         "game": {
-        "breakdown": {
-            "endSession": {
-                "sessionEnding": {
-                    "en": "Session ending in...",
-                    "ru": "Игра завершится через…",
-                    "kk": "Сессия аяқталарға .... қалды"
-                },
-                "title": {
-                    "en": "END SESSION",
-                    "ru": "ЗАВЕРШИТЬ ИГРУ",
-                    "kk": "СЕССИЯНЫ АЯҚТАУ"
-                },
-                "message": {
-                    "en": "Are you sure you want to end the current game session?",
-                    "ru": "Ты уверен, что хочешь завершить эту игру?",
-                    "kk": "Шынымен осы ойын сессиясын аяқтағың келе ме?"
-                },
-                "yes": {
-                    "en": "YES",
-                    "ru": "ДА",
-                    "kk": "ИӘ"
-                },
-                "no": {
-                    "en": "NO",
-                    "ru": "ЖОҚ",
-                    "kk": "ЖОҚ"
+            "breakdown": {
+                "endSession": {
+                    "sessionEnding": {
+                        "en": "Session ending in...",
+                        "ru": "Игра завершится через…",
+                        "kk": "Сессия аяқталарға .... қалды"
+                    },
+                    "title": {
+                        "en": "END SESSION",
+                        "ru": "ЗАВЕРШИТЬ ИГРУ",
+                        "kk": "СЕССИЯНЫ АЯҚТАУ"
+                    },
+                    "message": {
+                        "en": "Are you sure you want to end the current game session?",
+                        "ru": "Ты уверен, что хочешь завершить эту игру?",
+                        "kk": "Шынымен осы ойын сессиясын аяқтағың келе ме?"
+                    },
+                    "yes": {
+                        "en": "YES",
+                        "ru": "ДА",
+                        "kk": "ИӘ"
+                    },
+                    "no": {
+                        "en": "NO",
+                        "ru": "ЖОҚ",
+                        "kk": "ЖОҚ"
+                    }
                 }
             }
-        }
-    },
-    "common": {
+        },
+        "common": {
             "back": {
                 "en": "Back",
                 "ru": "Назад",
@@ -116,6 +116,35 @@
                 "en": "Confirm",
                 "ru": "Подтвердить",
                 "kk": "Растау"
+            },
+            "autoReset": {
+                "warning": {
+                    "title": {
+                        "en": "Session Timeout Warning",
+                        "ru": "Предупреждение о тайм-ауте сессии",
+                        "kk": "Сессия уақыты туралы ескерту"
+                    },
+                    "message": {
+                        "en": "Your session will reset automatically due to inactivity. All progress will be lost.",
+                        "ru": "Ваша сессия будет автоматически сброшена из-за неактивности. Весь прогресс будет потерян.",
+                        "kk": "Белсенділік болмағандықтан сессияңыз автоматты түрде қалпына келтіріледі. Барлық прогресс жоғалады."
+                    },
+                    "continueButton": {
+                        "en": "Continue Playing",
+                        "ru": "Продолжить игру",
+                        "kk": "Ойынды жалғастыру"
+                    },
+                    "resetButton": {
+                        "en": "Reset Now",
+                        "ru": "Сбросить сейчас",
+                        "kk": "Қазір қалпына келтіру"
+                    },
+                    "extendInfo": {
+                        "en": "Clicking \"Continue Playing\" will extend your session by 10 minutes.",
+                        "ru": "Нажатие \"Продолжить игру\" продлит вашу сессию на 10 минут.",
+                        "kk": "\"Ойынды жалғастыру\" түймесін басу сессияңызды 10 минутқа ұзартады."
+                    }
+                }
             }
         }
     },

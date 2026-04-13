@@ -28,17 +28,11 @@ export function calculateQuestProgress(questId, gameState) {
     const { type } = questConfig;
     const { farm, inventory, session } = gameState;
 
-    console.log(`📋 Calculating progress for quest: ${questId}`, {
-        type,
-        sessionAnalytics: session.analytics
-    });
-
     switch (type) {
         case QUEST_TYPES.PLANT: {
             // Count total crops planted (from analytics)
             if (questId === 'first_plant') {
                 const progress = session.analytics.cropsPlanted || 0;
-                console.log(`  ✅ First plant progress: ${progress}`);
                 return progress;
             }
 

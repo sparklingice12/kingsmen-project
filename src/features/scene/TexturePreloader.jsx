@@ -56,7 +56,7 @@ function TexturePreloader({ onLoaded, children }) {
     ]);
 
     useEffect(() => {
-        if (textures && textures.length > 0) {
+        if (textures && textures.length > 0 && !isLoaded) {
             // Configure all textures for pixel-perfect rendering
             textures.forEach(texture => {
                 texture.magFilter = THREE.NearestFilter;
@@ -66,10 +66,8 @@ function TexturePreloader({ onLoaded, children }) {
 
             setIsLoaded(true);
             if (onLoaded) onLoaded();
-
-            console.log('✅ All textures preloaded successfully');
         }
-    }, [textures, onLoaded]);
+    }, [textures, isLoaded]); // Removed onLoaded from dependencies
 
     // Don't render children until textures are loaded
     return isLoaded ? children : null;

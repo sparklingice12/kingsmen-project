@@ -84,9 +84,10 @@ export const useStore = create(
         isPaused: false,
         currentDay: 1,
         timeOfDay: 0, // 0-1 (0=morning, 0.5=noon, 1=night)
+        attractMode: false, // Whether attract mode is active
 
         startGame: () => set((s) => ({
-          game: { ...s.game, isPlaying: true, isPaused: false }
+          game: { ...s.game, isPlaying: true, isPaused: false, attractMode: false }
         })),
         pauseGame: () => set((s) => ({
           game: { ...s.game, isPaused: true }
@@ -99,6 +100,9 @@ export const useStore = create(
         })),
         setTimeOfDay: (time) => set((s) => ({
           game: { ...s.game, timeOfDay: time }
+        })),
+        setAttractMode: (active) => set((s) => ({
+          game: { ...s.game, attractMode: active }
         })),
       },
 
@@ -118,9 +122,6 @@ export const useStore = create(
         plantCrop: (tileId, cropType) => {
           // Track crop planting for sustainability
           get().sustainabilityActions.trackCropPlanted(cropType);
-
-          // Track crop planting in session analytics - directly update
-          console.log('🌱 Planting crop:', cropType);
 
           set((s) => ({
             farm: {
@@ -145,8 +146,6 @@ export const useStore = create(
               }
             }
           }));
-
-          console.log('📊 Analytics after plant:', get().session.analytics);
         },
 
         harvestCrop: (tileId) => {
@@ -155,8 +154,6 @@ export const useStore = create(
             const cropValue = FARM_CONFIG.CROP_VALUES[tile.crop] || 0;
             get().inventory.addItem(tile.crop, 1);
             get().inventory.addCoins(cropValue);
-
-            console.log('🌾 Harvesting crop:', tile.crop);
 
             set((s) => ({
               farm: {
@@ -181,8 +178,6 @@ export const useStore = create(
                 }
               }
             }));
-
-            console.log('📊 Analytics after harvest:', get().session.analytics);
           }
         },
 
@@ -342,19 +337,35 @@ export const useStore = create(
         }),
 
         resetSession: () => set((s) => ({
-          game: { isPlaying: false, isPaused: false, currentDay: 1, timeOfDay: 0 },
+          game: {
+            isPlaying: false,
+            isPaused: false,
+            currentDay: 1,
+            timeOfDay: 0,
+            attractMode: false, // Explicitly reset attract mode
+            startGame: s.game.startGame,
+            pauseGame: s.game.pauseGame,
+            resumeGame: s.game.resumeGame,
+            advanceDay: s.game.advanceDay,
+            setTimeOfDay: s.game.setTimeOfDay,
+            setAttractMode: s.game.setAttractMode,
+          },
           farm: {
+            ...s.farm,
             tiles: initializeFarmGrid() // Reset to initial grid state
           },
           inventory: {
+            ...s.inventory,
             coins: FARM_CONFIG.INITIAL_COINS,
             seeds: { ...FARM_CONFIG.INITIAL_SEEDS },
             harvested: { bean: 0, wheat: 0, tomato: 0, carrot: 0, egg: 0 }
           },
           animals: {
+            ...s.animals,
             chickens: []
           },
           session: {
+            ...s.session,
             startTime: null,
             lastInteraction: Date.now(),
             analytics: {
@@ -368,6 +379,7 @@ export const useStore = create(
           },
           sustainability: initializeSustainabilityState(),
           quests: {
+            ...s.quests,
             activeQuests: [],
             completedQuestIds: [],
             currentQuestId: null,
