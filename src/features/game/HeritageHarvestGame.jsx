@@ -6,6 +6,8 @@ import { ToolFeedback, ToolSelector, SeedSelector } from '@/features/tools';
 import { HeritageCodex } from '@/features/codex';
 import { useCodexUnlockTracking } from '@/features/codex/useCodexUnlockTracking';
 import { Shop } from '@/features/shop';
+import Goals from '@/features/goals/Goals.module';
+import { useGoalIntegration, GoalCompletionNotification } from '@/features/goals';
 import EducationalModal from '@/features/education/EducationalModal.module';
 import { DayTransition } from '@/features/time';
 import { DaySummary } from '@/features/summary';
@@ -45,6 +47,9 @@ function HeritageHarvestGame() {
 
     // Quest integration - automatically tracks progress and shows completion notifications
     const { completedQuest, clearCompletedQuest } = useQuestIntegration();
+
+    // Goal integration - automatically tracks progress and shows completion notifications
+    const { completedGoal, clearCompletedGoal } = useGoalIntegration();
 
     // Codex unlock tracking - automatically tracks and persists unlocked entries
     useCodexUnlockTracking();
@@ -341,6 +346,15 @@ function HeritageHarvestGame() {
                                 <span>Shop</span>
                             </button>
 
+                            <button
+                                onClick={() => useStore.getState().ui.openGameModal('goals', null)}
+                                className="w-full mt-1 sm:mt-2 px-2 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold text-[10px] sm:text-sm transition-all duration-200 flex items-center justify-center gap-1 sm:gap-2 border-2 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+                                style={{ background: 'linear-gradient(to right, #4a3020, #3a2515)', borderColor: '#b09060', color: '#e8d5b0' }}
+                            >
+                                <span className="text-sm sm:text-lg">🏆</span>
+                                <span>Goals</span>
+                            </button>
+
                             {/* Audio Toggle */}
                             <div className="mt-1 sm:mt-2">
                                 <AudioToggle
@@ -357,6 +371,7 @@ function HeritageHarvestGame() {
             <HeritageCodex />
             <SettingsModal />
             {modalOpen === 'shop' && <Shop />}
+            {modalOpen === 'goals' && <Goals />}
             {modalOpen === 'day-summary' && <DaySummary />}
 
             {/* Auto-reset system - shows warning modal when inactivity detected */}
@@ -372,6 +387,14 @@ function HeritageHarvestGame() {
                 <QuestCompletionNotification
                     quest={completedQuest}
                     onClose={clearCompletedQuest}
+                />
+            )}
+
+            {/* Goal Completion Notification */}
+            {completedGoal && (
+                <GoalCompletionNotification
+                    goal={completedGoal}
+                    onClose={clearCompletedGoal}
                 />
             )}
         </div>

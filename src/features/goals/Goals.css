@@ -1,0 +1,359 @@
+/**
+ * Goals Modal Styles
+ * 
+ * Styling for achievement goals display
+ */
+
+/* Backdrop */
+.goals__backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+/* Container */
+.goals__container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    background: linear-gradient(to bottom, #3a2518, #2e1e14);
+    border: 3px solid #b09060;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Close Button */
+.goals__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(46, 30, 20, 0.9);
+    border: 2px solid #b09060;
+    border-radius: 50%;
+    color: #e8d5b0;
+    font-size: 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.goals__close:hover {
+    background: rgba(176, 144, 96, 0.3);
+    transform: scale(1.1);
+}
+
+.goals__close:active {
+    transform: scale(0.95);
+}
+
+/* Header */
+.goals__header {
+    padding: 2rem 2rem 1.5rem;
+    background: linear-gradient(to bottom, rgba(58, 37, 24, 0.95), rgba(46, 30, 20, 0.9));
+    border-bottom: 2px solid rgba(176, 144, 96, 0.4);
+}
+
+.goals__title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #e8d5b0;
+    margin: 0 0 0.5rem;
+    text-align: center;
+}
+
+.goals__subtitle {
+    font-size: 1rem;
+    color: #b09060;
+    margin: 0 0 1.5rem;
+    text-align: center;
+}
+
+/* Overall Progress */
+.goals__overall-progress {
+    background: rgba(30, 18, 10, 0.6);
+    border: 2px solid rgba(176, 144, 96, 0.3);
+    border-radius: 0.75rem;
+    padding: 1rem;
+}
+
+.goals__overall-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.goals__overall-count {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e8d5b0;
+}
+
+.goals__overall-percentage {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #c4a06a;
+}
+
+.goals__overall-bar {
+    height: 1rem;
+    background: rgba(30, 18, 10, 0.8);
+    border: 1px solid rgba(176, 144, 96, 0.3);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.goals__overall-fill {
+    height: 100%;
+    background: linear-gradient(to right, #b09060, #c4a06a);
+    transition: width 0.5s ease-out;
+}
+
+/* Content */
+.goals__content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 2rem 2rem;
+}
+
+/* Category */
+.goals__category {
+    margin-bottom: 2rem;
+}
+
+.goals__category:last-child {
+    margin-bottom: 0;
+}
+
+.goals__category-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #c4a06a;
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(176, 144, 96, 0.3);
+}
+
+/* Goals List */
+.goals__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Goal Card */
+.goals__card {
+    background: rgba(46, 30, 20, 0.8);
+    border: 2px solid rgba(176, 144, 96, 0.4);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    transition: all 0.3s;
+}
+
+.goals__card:hover {
+    border-color: rgba(176, 144, 96, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.goals__card.completed {
+    background: rgba(58, 37, 24, 0.9);
+    border-color: #b09060;
+}
+
+/* Card Header */
+.goals__card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.goals__card-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.goals__card-info {
+    flex: 1;
+}
+
+.goals__card-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #e8d5b0;
+    margin: 0 0 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.goals__card-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+    border-radius: 50%;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+
+.goals__card-description {
+    font-size: 0.875rem;
+    color: #b09060;
+    margin: 0;
+}
+
+/* Progress */
+.goals__card-progress {
+    margin-bottom: 0.75rem;
+}
+
+.goals__progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.goals__progress-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #c4a06a;
+}
+
+.goals__progress-percentage {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #e8d5b0;
+}
+
+.goals__progress-bar {
+    height: 0.75rem;
+    background: rgba(30, 18, 10, 0.8);
+    border: 1px solid rgba(176, 144, 96, 0.3);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.goals__progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, #b09060, #c4a06a);
+    transition: width 0.5s ease-out;
+}
+
+.goals__card.completed .goals__progress-fill {
+    background: linear-gradient(to right, #4ade80, #22c55e);
+}
+
+/* Reward */
+.goals__card-reward {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(176, 144, 96, 0.2);
+    border: 1px solid rgba(176, 144, 96, 0.4);
+    border-radius: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.goals__reward-icon {
+    font-size: 1.25rem;
+}
+
+.goals__reward-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #e8d5b0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .goals__container {
+        max-width: 100%;
+        max-height: 95vh;
+        border-radius: 1rem;
+    }
+
+    .goals__header {
+        padding: 1.5rem 1.5rem 1rem;
+    }
+
+    .goals__title {
+        font-size: 1.5rem;
+    }
+
+    .goals__subtitle {
+        font-size: 0.875rem;
+    }
+
+    .goals__content {
+        padding: 1rem 1.5rem 1.5rem;
+    }
+
+    .goals__category-title {
+        font-size: 1.125rem;
+    }
+
+    .goals__card {
+        padding: 1rem;
+    }
+
+    .goals__card-icon {
+        font-size: 2rem;
+    }
+
+    .goals__card-title {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .goals__backdrop {
+        padding: 0.5rem;
+    }
+
+    .goals__header {
+        padding: 1rem;
+    }
+
+    .goals__title {
+        font-size: 1.25rem;
+    }
+
+    .goals__content {
+        padding: 0.75rem 1rem 1rem;
+    }
+
+    .goals__card {
+        padding: 0.875rem;
+    }
+
+    .goals__card-header {
+        gap: 0.75rem;
+    }
+
+    .goals__card-icon {
+        font-size: 1.75rem;
+    }
+}

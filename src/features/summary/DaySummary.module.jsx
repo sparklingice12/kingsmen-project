@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useStore } from '@/state/store';
 import { X } from 'lucide-react';
 import { getFeedback, getTips } from '@/features/sustainability';
+import { getGoalsSummary } from '@/features/goals/goals.service';
 import './DaySummary.css';
 
 /**
@@ -18,6 +19,7 @@ export default function DaySummary() {
     const tiles = useStore((s) => s.farm.tiles);
     const inventory = useStore((s) => s.inventory);
     const sustainability = useStore((s) => s.sustainability);
+    const goals = useStore((s) => s.session.goals);
     const closeGameModal = useStore((s) => s.ui.closeGameModal);
     const resumeGame = useStore((s) => s.game.resumeGame);
     const advanceDay = useStore((s) => s.game.advanceDay);
@@ -44,6 +46,7 @@ export default function DaySummary() {
     }, [tiles, inventory, calculateDayScore]);
 
     const feedback = getFeedback(dayStats.sustainabilityScore);
+    const goalsSummary = getGoalsSummary(goals);
 
     const handleContinue = () => {
         closeGameModal();
@@ -109,6 +112,28 @@ export default function DaySummary() {
                         <div className="day-summary__achievement-text">
                             <strong>{feedback.level === 'excellent' ? 'Excellent!' : 'Good Work!'}</strong>
                             <p>{feedback.message}</p>
+                        </div>
+                    </div>
+                )}
+
+                {/* Goals Progress */}
+                {goalsSummary.completed > 0 && (
+                    <div className="day-summary__goals">
+                        <h3 className="day-summary__goals-title">
+                            🏆 Goals Progress ({goalsSummary.completed}/{goalsSummary.total})
+                        </h3>
+                        <div className="day-summary__goals-list">
+                            {goalsSummary.completedGoals.map((goal) => (
+                                <div key={goal.id} className="day-summary__goal-item">
+                                    <span className="day-summary__goal-check">✓</span>
+                                    <div className="day-summary__goal-info">
+                                        <strong>{goal.title}</strong>
+                                        <span className="day-summary__goal-reward">
+                                            🎁 {goal.reward}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 )}
