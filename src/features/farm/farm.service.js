@@ -192,3 +192,30 @@ export function validateTile(tile) {
         Object.values(FARM_CONFIG.TILE_STATES).includes(tile.state)
     );
 }
+
+/**
+ * Get adjacent tiles in an area around a center tile
+ * @param {Array} tiles - All farm tiles
+ * @param {number} centerRow - Center tile row
+ * @param {number} centerCol - Center tile column
+ * @param {number} areaSize - Size of area (1=1x1, 3=3x3, 5=5x5)
+ * @returns {Array} Array of tile IDs in the area
+ */
+export function getAdjacentTiles(tiles, centerRow, centerCol, areaSize) {
+    const adjacentTiles = [];
+    const radius = Math.floor(areaSize / 2);
+
+    for (let row = centerRow - radius; row <= centerRow + radius; row++) {
+        for (let col = centerCol - radius; col <= centerCol + radius; col++) {
+            // Check if within grid bounds
+            if (row >= 0 && row < FARM_CONFIG.GRID_SIZE && col >= 0 && col < FARM_CONFIG.GRID_SIZE) {
+                const tile = findTileByPosition(tiles, row, col);
+                if (tile) {
+                    adjacentTiles.push(tile.id);
+                }
+            }
+        }
+    }
+
+    return adjacentTiles;
+}

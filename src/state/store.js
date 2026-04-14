@@ -151,9 +151,8 @@ export const useStore = create(
         harvestCrop: (tileId) => {
           const tile = get().farm.tiles.find(t => t.id === tileId);
           if (tile?.crop && tile.state === FARM_CONFIG.TILE_STATES.READY) {
-            const cropValue = FARM_CONFIG.CROP_VALUES[tile.crop] || 0;
+            // Add crop to inventory (coins earned when selling at shop)
             get().inventory.addItem(tile.crop, 1);
-            get().inventory.addCoins(cropValue);
 
             set((s) => ({
               farm: {
@@ -196,16 +195,30 @@ export const useStore = create(
           const state = get();
           const tile = state.farm.tiles.find(t => t.id === tileId);
 
-          // Track over-watering if tile is already watered or ready
-          if (tile && (tile.isWatered || tile.state === FARM_CONFIG.TILE_STATES.READY)) {
-            state.sustainabilityActions.trackOverWatering();
-          }
+          if (!tile) return;
 
+          // Get watering can upgrade level
+          const wateringCanLevel = state.inventory.upgrades.wateringCan;
+          const areaSize = wateringCanLevel === 'steel' ? 5 : wateringCanLevel === 'copper' ? 3 : 1;
+
+          // Get tiles to water based on area size
+          const { getAdjacentTiles } = require('@/features/farm/farm.service');
+          const tilesToWater = getAdjacentTiles(state.farm.tiles, tile.row, tile.col, areaSize);
+
+          // Track over-watering for each tile
+          tilesToWater.forEach(targetTileId => {
+            const targetTile = state.farm.tiles.find(t => t.id === targetTileId);
+            if (targetTile && (targetTile.isWatered || targetTile.state === FARM_CONFIG.TILE_STATES.READY)) {
+              state.sustainabilityActions.trackOverWatering();
+            }
+          });
+
+          // Water all tiles in the area
           set((s) => ({
             farm: {
               ...s.farm,
               tiles: s.farm.tiles.map(t =>
-                t.id === tileId
+                tilesToWater.includes(t.id)
                   ? {
                     ...t,
                     // Preserve READY state - don't change it back to WATERED
@@ -233,6 +246,24 @@ export const useStore = create(
           carrot: 0,
           egg: 0, // Add eggs to harvested items
         },
+        upgrades: {
+          wateringCan: 'basic', // 'basic' | 'copper' | 'steel'
+          inventorySize: 12,    // 12 | 24 | 48
+        },
+
+        // Helper: Calculate seeds inventory count (only seeds, not harvested items)
+        getSeedsInventoryCount: () => {
+          const state = get();
+          const seedsCount = Object.values(state.inventory.seeds).reduce((sum, count) => sum + count, 0);
+          return seedsCount;
+        },
+
+        // Helper: Calculate harvested items count (for display only, no limit)
+        getHarvestedInventoryCount: () => {
+          const state = get();
+          const harvestedCount = Object.values(state.inventory.harvested).reduce((sum, count) => sum + count, 0);
+          return harvestedCount;
+        },
 
         addCoins: (amount) => {
           // Play coin earning sound
@@ -249,15 +280,45 @@ export const useStore = create(
           inventory: { ...s.inventory, coins: Math.max(0, s.inventory.coins - amount) }
         })),
 
-        addItem: (type, quantity) => set((s) => ({
-          inventory: {
-            ...s.inventory,
-            harvested: {
-              ...s.inventory.harvested,
-              [type]: (s.inventory.harvested[type] || 0) + quantity
+        addItem: (type, quantity) => {
+          // Harvested items have unlimited storage - no capacity check
+          set((s) => ({
+            inventory: {
+              ...s.inventory,
+              harvested: {
+                ...s.inventory.harvested,
+                [type]: (s.inventory.harvested[type] || 0) + quantity
+              }
             }
+          }));
+
+          return { success: true };
+        },
+
+        purchaseUpgrade: (upgradeType, upgradeTier, cost) => {
+          const state = get();
+
+          // Validate coin balance
+          if (state.inventory.coins < cost) {
+            return { success: false, message: 'Not enough coins!' };
           }
-        })),
+
+          // Deduct coins
+          state.inventory.spendCoins(cost);
+
+          // Update upgrade
+          set((s) => ({
+            inventory: {
+              ...s.inventory,
+              upgrades: {
+                ...s.inventory.upgrades,
+                [upgradeType]: upgradeTier
+              }
+            }
+          }));
+
+          return { success: true, message: 'Upgrade purchased!' };
+        },
 
         useSeed: (type) => set((s) => ({
           inventory: {
@@ -269,15 +330,28 @@ export const useStore = create(
           }
         })),
 
-        addSeeds: (type, quantity) => set((s) => ({
-          inventory: {
-            ...s.inventory,
-            seeds: {
-              ...s.inventory.seeds,
-              [type]: (s.inventory.seeds[type] || 0) + quantity
-            }
+        addSeeds: (type, quantity) => {
+          const state = get();
+          const currentCount = state.inventory.getSeedsInventoryCount();
+          const maxCapacity = state.inventory.upgrades.inventorySize;
+
+          // Check if adding seeds would exceed capacity (only seeds count)
+          if (currentCount + quantity > maxCapacity) {
+            return { success: false, message: 'Seed Inventory Full!' };
           }
-        })),
+
+          set((s) => ({
+            inventory: {
+              ...s.inventory,
+              seeds: {
+                ...s.inventory.seeds,
+                [type]: (s.inventory.seeds[type] || 0) + quantity
+              }
+            }
+          }));
+
+          return { success: true };
+        },
       },
 
       // Session state slice
@@ -358,7 +432,11 @@ export const useStore = create(
             ...s.inventory,
             coins: FARM_CONFIG.INITIAL_COINS,
             seeds: { ...FARM_CONFIG.INITIAL_SEEDS },
-            harvested: { bean: 0, wheat: 0, tomato: 0, carrot: 0, egg: 0 }
+            harvested: { bean: 0, wheat: 0, tomato: 0, carrot: 0, egg: 0 },
+            upgrades: {
+              wateringCan: 'basic',
+              inventorySize: 12,
+            }
           },
           animals: {
             ...s.animals,

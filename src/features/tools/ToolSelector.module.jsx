@@ -15,6 +15,7 @@ function ToolSelector() {
     const selectedTool = useStore((s) => s.ui.selectedTool);
     const setTool = useStore((s) => s.ui.setTool);
     const updateInteraction = useStore((s) => s.session.updateInteraction);
+    const wateringCanLevel = useStore((s) => s.inventory.upgrades.wateringCan);
 
     const tools = getAllTools();
 
@@ -28,6 +29,30 @@ function ToolSelector() {
         updateInteraction();
     };
 
+    // Get watering can icon based on upgrade level
+    const getWateringCanIcon = () => {
+        switch (wateringCanLevel) {
+            case 'copper':
+                return '🟠';
+            case 'steel':
+                return '⚙️';
+            default:
+                return '💧';
+        }
+    };
+
+    // Get watering can name based on upgrade level
+    const getWateringCanName = () => {
+        switch (wateringCanLevel) {
+            case 'copper':
+                return 'Copper Can';
+            case 'steel':
+                return 'Steel Can';
+            default:
+                return 'Water';
+        }
+    };
+
     return (
         <div className="fixed top-1/2 right-2 sm:right-4 transform -translate-y-1/2 pointer-events-auto z-50">
             <motion.div
@@ -39,6 +64,11 @@ function ToolSelector() {
             >
                 {tools.map((tool) => {
                     const isSelected = selectedTool === tool.id;
+
+                    // Override watering can icon and name based on upgrade level
+                    const displayIcon = tool.id === 'watering_can' ? getWateringCanIcon() : tool.icon;
+                    const displayName = tool.id === 'watering_can' ? getWateringCanName() : tool.name;
+                    const showUpgradeBadge = tool.id === 'watering_can' && wateringCanLevel !== 'basic';
 
                     return (
                         <motion.button
@@ -58,7 +88,7 @@ function ToolSelector() {
                             {tool.iconImage ? (
                                 <img
                                     src={tool.iconImage}
-                                    alt={tool.name}
+                                    alt={displayName}
                                     className="w-10 h-10 sm:w-14 sm:h-14 mb-0.5 object-cover"
                                     style={{
                                         imageRendering: 'pixelated',
@@ -66,11 +96,16 @@ function ToolSelector() {
                                     }}
                                 />
                             ) : (
-                                <span className="text-xl sm:text-2xl mb-0.5">{tool.icon}</span>
+                                <span className="text-xl sm:text-2xl mb-0.5">{displayIcon}</span>
                             )}
                             <span className={`text-[8px] sm:text-[10px] font-semibold leading-tight ${isSelected ? 'text-[#e8d5b0]' : 'text-[#b09060]'}`}>
-                                {tool.name}
+                                {displayName}
                             </span>
+                            {showUpgradeBadge && (
+                                <div className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 border-2 border-white flex items-center justify-center">
+                                    <span className="text-[8px] sm:text-[10px]">⬆</span>
+                                </div>
+                            )}
                             {isSelected && (
                                 <motion.div
                                     layoutId="tool-selector"

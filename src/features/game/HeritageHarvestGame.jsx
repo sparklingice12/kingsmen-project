@@ -256,6 +256,9 @@ function HeritageHarvestGame() {
                                     <p className="text-[10px] sm:text-xs mt-0.5 sm:mt-1" style={{ color: '#8a7050' }}>
                                         {timeIcon} {timeString}
                                     </p>
+                                    <p className="text-[10px] sm:text-xs mt-0.5 sm:mt-1 font-semibold" style={{ color: '#c4a06a' }}>
+                                        🎒 Seeds: {useStore.getState().inventory.getSeedsInventoryCount()}/{useStore.getState().inventory.upgrades.inventorySize}
+                                    </p>
 
                                     <p className="text-[10px] sm:text-xs font-semibold mt-1 sm:mt-2" style={{ color: '#c4a06a' }}>
                                         {timeOfDay < 0.25 ? '🌅 Morning' :

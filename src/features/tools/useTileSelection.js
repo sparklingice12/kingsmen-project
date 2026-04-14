@@ -141,13 +141,9 @@ export function useTileSelection() {
             // Handle harvest rewards
             if (selectedTool === 'harvest_tool' && result.harvestedCrop) {
                 const cropType = result.harvestedCrop.type;
-                const cropValue = FARM_CONFIG.CROP_VALUES[cropType] || 0;
 
-                // Add harvested crop to inventory
+                // Add harvested crop to inventory (unlimited storage)
                 addItem(cropType, 1);
-
-                // Award coins
-                addCoins(cropValue);
 
                 // Track harvest in analytics
                 const currentHarvested = useStore.getState().session.analytics.cropsHarvested || 0;
@@ -162,7 +158,7 @@ export function useTileSelection() {
                     detail: {
                         position: tile.position,
                         cropType,
-                        coinValue: cropValue,
+                        coinValue: 0, // No coins on harvest - must sell at shop
                     }
                 }));
             }

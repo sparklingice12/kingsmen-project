@@ -89,25 +89,27 @@ function HarvestEffect({ position, cropType, coinValue, onComplete }) {
                 </sprite>
             ))}
 
-            {/* Coin reward text */}
-            <Html
-                position={[0, 0.5, 0]}
-                center
-                style={{ pointerEvents: 'none' }}
-                zIndexRange={[100, 0]}
-            >
-                <div
-                    style={{
-                        fontSize: '24px',
-                        fontWeight: 'bold',
-                        color: '#FFD700',
-                        textShadow: '0 2px 4px rgba(0,0,0,0.8)',
-                        animation: 'floatUp 1.5s ease-out forwards',
-                    }}
+            {/* Coin reward text - only show if coins are earned */}
+            {coinValue > 0 && (
+                <Html
+                    position={[0, 0.5, 0]}
+                    center
+                    style={{ pointerEvents: 'none' }}
+                    zIndexRange={[100, 0]}
                 >
-                    +{coinValue} 🪙
-                </div>
-            </Html>
+                    <div
+                        style={{
+                            fontSize: '24px',
+                            fontWeight: 'bold',
+                            color: '#FFD700',
+                            textShadow: '0 2px 4px rgba(0,0,0,0.8)',
+                            animation: 'floatUp 1.5s ease-out forwards',
+                        }}
+                    >
+                        +{coinValue} 🪙
+                    </div>
+                </Html>
+            )}
         </group>
     );
 }
