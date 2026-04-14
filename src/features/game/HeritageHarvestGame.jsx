@@ -51,7 +51,7 @@ function HeritageHarvestGame() {
     // Inactivity detection for attract mode (only when game is playing)
     const { isInactive, resetTimer } = useInactivityDetection({
         enabled: isPlaying && !modalOpen && !attractMode,
-        timeout: 30000, // 30 seconds as per requirements
+        timeout: 60000, // 1 minute of inactivity
         onInactive: () => {
             setAttractMode(true);
         },

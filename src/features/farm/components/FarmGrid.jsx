@@ -3,6 +3,7 @@ import { useStore } from '@/state/store';
 import Tile from './Tile';
 import { CropSprite, HarvestEffect } from '@/features/crops';
 import WateringEffect from '@/features/tools/components/WateringEffect';
+import WateringCanPreview from '@/features/tools/components/WateringCanPreview';
 import { FARM_CONFIG } from '../farm.config';
 
 /**
@@ -11,8 +12,12 @@ import { FARM_CONFIG } from '../farm.config';
  * Renders all 64 farm tiles in the 3D scene.
  * Subscribes to Zustand store for tile state updates.
  * Renders crops on top of tiles.
+ * 
+ * @param {Object} props
+ * @param {Object} props.hoveredTile - Currently hovered tile (for watering can preview)
+ * @param {Array} props.affectedTileIds - Tile IDs that will be affected by watering can
  */
-function FarmGrid() {
+function FarmGrid({ hoveredTile, affectedTileIds }) {
     const tiles = useStore((s) => s.farm.tiles);
     const selectedTool = useStore((s) => s.ui.selectedTool);
     const openGameModal = useStore((s) => s.ui.openGameModal);
@@ -138,6 +143,15 @@ function FarmGrid() {
                     onComplete={() => removeWateringEffect(effect.id)}
                 />
             ))}
+
+            {/* Render watering can preview overlay */}
+            {selectedTool === 'watering_can' && hoveredTile && affectedTileIds && (
+                <WateringCanPreview
+                    centerTile={hoveredTile}
+                    affectedTileIds={affectedTileIds}
+                    allTiles={tiles}
+                />
+            )}
         </group>
     );
 }

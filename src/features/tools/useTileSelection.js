@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { useStore } from '@/state/store';
 import { validateAndApplyTool } from './tools.service';
 import { FARM_CONFIG } from '@/features/farm/farm.config';
+import { getAdjacentTiles } from '@/features/farm/farm.service';
 
 /**
  * useTileSelection Hook
@@ -17,6 +18,7 @@ import { FARM_CONFIG } from '@/features/farm/farm.config';
 export function useTileSelection() {
     const { camera, size } = useThree();
     const [selectedTile, setSelectedTile] = useState(null);
+    const [hoveredTile, setHoveredTile] = useState(null);
     const raycaster = useRef(new THREE.Raycaster()).current;
     const pointer = useRef(new THREE.Vector2()).current;
 
@@ -26,6 +28,7 @@ export function useTileSelection() {
     const selectedTool = useStore((s) => s.ui.selectedTool);
     const selectedSeed = useStore((s) => s.ui.selectedSeed);
     const inventory = useStore((s) => s.inventory);
+    const wateringCanLevel = useStore((s) => s.inventory.upgrades.wateringCan);
     const useSeed = useStore((s) => s.inventory.useSeed);
     const addItem = useStore((s) => s.inventory.addItem);
     const addCoins = useStore((s) => s.inventory.addCoins);
@@ -215,10 +218,49 @@ export function useTileSelection() {
         handleTileInteraction(event.clientX, event.clientY);
     }, [handleTileInteraction]);
 
+    /**
+     * Handle mouse move for hover preview (only for watering can)
+     */
+    const handleMouseMove = useCallback((event) => {
+        // Only show preview when watering can is selected
+        if (selectedTool !== 'watering_can') {
+            if (hoveredTile) setHoveredTile(null);
+            return;
+        }
+
+        // Ignore if over joystick area
+        if (event.clientX < 200 && event.clientY > window.innerHeight - 200) {
+            if (hoveredTile) setHoveredTile(null);
+            return;
+        }
+
+        // Find tile via raycast
+        const tile = raycastTile(event.clientX, event.clientY);
+        setHoveredTile(tile);
+    }, [selectedTool, raycastTile, hoveredTile]);
+
+    /**
+     * Calculate affected tiles for watering can preview
+     */
+    const getAffectedTiles = useCallback(() => {
+        if (!hoveredTile || selectedTool !== 'watering_can') {
+            return [];
+        }
+
+        // Determine area size based on upgrade level
+        const areaSize = wateringCanLevel === 'steel' ? 5 : wateringCanLevel === 'copper' ? 3 : 1;
+
+        // Use imported getAdjacentTiles function
+        return getAdjacentTiles(tiles, hoveredTile.row, hoveredTile.col, areaSize);
+    }, [hoveredTile, selectedTool, wateringCanLevel, tiles]);
+
     return {
         selectedTile,
+        hoveredTile,
+        affectedTileIds: getAffectedTiles(),
         handleTouchStart,
         handleMouseDown,
+        handleMouseMove,
         raycastTile,
     };
 }

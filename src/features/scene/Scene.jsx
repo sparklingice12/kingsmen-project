@@ -3,6 +3,7 @@ import { FarmGrid, FarmBackground, FarmFence } from '@/features/farm/components'
 import { Player } from '@/features/player/components';
 import { PhysicsWorld } from '@/features/physics';
 import TileInteractionHandler from '@/features/tools/TileInteractionHandler';
+import { useTileSelection } from '@/features/tools/useTileSelection';
 import { TimeManager, DynamicLighting } from '@/features/time';
 import { NPCGuide } from '@/features/npc';
 import { AnimalsModule } from '@/features/animals';
@@ -22,6 +23,9 @@ import { useStore } from '@/state/store';
  */
 function Scene() {
     const setNPCDialogueOpen = useStore((s) => s.ui.setNPCDialogueOpen);
+
+    // Get hover data for watering can preview
+    const { hoveredTile, affectedTileIds } = useTileSelection();
 
     const handleNPCTap = () => {
         setNPCDialogueOpen(true);
@@ -53,7 +57,7 @@ function Scene() {
             <FarmFence />
 
             {/* Farm Grid - 64 tiles (outside physics for performance) */}
-            <FarmGrid />
+            <FarmGrid hoveredTile={hoveredTile} affectedTileIds={affectedTileIds} />
 
             {/* NPC Guide - Scarecrow */}
             <NPCGuide onTap={handleNPCTap} />

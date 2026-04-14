@@ -6,7 +6,7 @@
 export const kioskConfig = {
     // Auto-reset settings
     INACTIVITY_TIMEOUT: 10 * 60 * 1000, // 10 minutes in milliseconds
-    WARNING_DURATION: 30 * 1000, // 30 seconds warning before reset
+    WARNING_DURATION: 60 * 1000, // 60 seconds (1 minute) warning before reset
     SESSION_EXTENSION: 10 * 60 * 1000, // 10 minutes extension when user continues
 
     // Attract mode settings
