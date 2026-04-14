@@ -246,13 +246,16 @@
 .codex__detail {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .codex__back-button {
+    flex-shrink: 0;
     align-self: flex-start;
     padding: 8px 16px;
-    margin: 16px 24px 0;
+    margin: 16px 24px 8px;
     background: rgba(139, 111, 71, 0.2);
     border: 2px solid #8b6f47;
     border-radius: 6px;
@@ -271,7 +274,9 @@
 .codex__detail-content {
     flex: 1;
     overflow-y: auto;
-    padding: 24px;
+    overflow-x: hidden;
+    padding: 16px 24px 24px;
+    min-height: 0;
 }
 
 .codex__detail-title {
@@ -311,6 +316,49 @@
     color: #a88958;
     margin: 0;
     font-style: italic;
+}
+
+.codex__illustration-hint {
+    font-size: 11px;
+    color: #8b6f47;
+    margin: 4px 0 0 0;
+    font-style: italic;
+}
+
+.codex__illustration-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.codex__loading-spinner {
+    font-size: 48px;
+    animation: spin 2s linear infinite;
+}
+
+.codex__loading-text {
+    font-size: 13px;
+    color: #a88958;
+    margin: 0;
+}
+
+.codex__illustration-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    border: 2px solid #8b6f47;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .codex__detail-text {

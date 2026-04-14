@@ -251,6 +251,63 @@ function HeritageCodex() {
 }
 
 /**
+ * Illustration Image Component
+ * 
+ * Handles image loading, errors, and fallback to placeholder
+ */
+function IllustrationImage({ src, alt, title }) {
+    const [imageStatus, setImageStatus] = useState('loading'); // 'loading' | 'loaded' | 'error'
+
+    useEffect(() => {
+        setImageStatus('loading');
+
+        const img = new Image();
+        img.onload = () => setImageStatus('loaded');
+        img.onerror = () => setImageStatus('error');
+        img.src = src;
+
+        return () => {
+            img.onload = null;
+            img.onerror = null;
+        };
+    }, [src]);
+
+    if (imageStatus === 'loading') {
+        return (
+            <div className="codex__illustration-placeholder">
+                <div className="codex__illustration-loading">
+                    <span className="codex__loading-spinner">⏳</span>
+                    <p className="codex__loading-text">Loading illustration...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (imageStatus === 'error') {
+        return (
+            <div className="codex__illustration-placeholder">
+                <span className="codex__illustration-icon">🖼️</span>
+                <p className="codex__illustration-text">
+                    Illustration: {src}
+                </p>
+                <p className="codex__illustration-hint">
+                    (Image not yet available)
+                </p>
+            </div>
+        );
+    }
+
+    return (
+        <img
+            src={src}
+            alt={alt}
+            title={title}
+            className="codex__illustration-image"
+        />
+    );
+}
+
+/**
  * Entry Detail View Component
  * 
  * Shows full content of a selected encyclopedia entry
@@ -270,14 +327,13 @@ function EntryDetailView({ entry, onBack }) {
             <div className="codex__detail-content">
                 <h2 className="codex__detail-title">{entry.title}</h2>
 
-                {/* Illustration placeholder */}
+                {/* Illustration */}
                 <div className="codex__detail-illustration">
-                    <div className="codex__illustration-placeholder">
-                        <span className="codex__illustration-icon">🖼️</span>
-                        <p className="codex__illustration-text">
-                            Illustration: {entry.illustration}
-                        </p>
-                    </div>
+                    <IllustrationImage
+                        src={entry.illustration}
+                        alt={entry.title}
+                        title={entry.title}
+                    />
                 </div>
 
                 {/* Full Content */}
