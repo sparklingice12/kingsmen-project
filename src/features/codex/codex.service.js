@@ -16,6 +16,13 @@ import { CODEX_ENTRIES, CODEX_CONFIG } from './codex.config';
  * @returns {boolean} - Whether the entry is unlocked
  */
 export function isEntryUnlocked(entry, gameState) {
+    // Check if entry was previously unlocked (permanent unlock)
+    const previouslyUnlocked = gameState.session?.analytics?.codexEntriesUnlocked || [];
+    if (previouslyUnlocked.includes(entry.id)) {
+        return true;
+    }
+
+    // Otherwise check unlock conditions
     const { unlockCondition, unlockValue } = entry;
 
     switch (unlockCondition) {
@@ -23,9 +30,15 @@ export function isEntryUnlocked(entry, gameState) {
             return true;
 
         case CODEX_CONFIG.UNLOCK_CONDITIONS.PLANT_CROP: {
-            // Check if the specific crop has been planted
+            // Check if the specific crop has been planted (ever, not just currently)
             const tiles = gameState.farm?.tiles || [];
-            return tiles.some(tile => tile.crop === unlockValue);
+            const hasPlanted = tiles.some(tile => tile.crop?.type === unlockValue || tile.crop === unlockValue);
+
+            // Also check if it was planted before (from analytics)
+            const cropTypesPlanted = gameState.session?.analytics?.cropTypesPlanted || [];
+            const wasPlanted = cropTypesPlanted.includes(unlockValue);
+
+            return hasPlanted || wasPlanted;
         }
 
         case CODEX_CONFIG.UNLOCK_CONDITIONS.HARVEST_CROP: {
@@ -55,9 +68,14 @@ export function isEntryUnlocked(entry, gameState) {
             const uniqueCrops = new Set(
                 tiles
                     .filter(tile => tile.crop)
-                    .map(tile => tile.crop)
+                    .map(tile => tile.crop?.type || tile.crop)
             );
-            return uniqueCrops.size >= unlockValue;
+
+            // Also check from analytics
+            const cropTypesPlanted = gameState.session?.analytics?.cropTypesPlanted || [];
+            const totalUnique = new Set([...uniqueCrops, ...cropTypesPlanted]);
+
+            return totalUnique.size >= unlockValue;
         }
 
         default:
@@ -171,7 +189,7 @@ export function getUnlockProgress(entry, gameState) {
             const uniqueCrops = new Set(
                 tiles
                     .filter(tile => tile.crop)
-                    .map(tile => tile.crop)
+                    .map(tile => tile.crop?.type || tile.crop)
             );
             return {
                 current: uniqueCrops.size,

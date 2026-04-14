@@ -17,6 +17,7 @@ import {
   getNewlyCompletedQuests,
   applyQuestReward
 } from '@/features/quests/quests.service';
+import { initializeGoals, updateGoalProgress } from '@/features/goals/goals.service';
 
 export const useStore = create(
   persist(
@@ -361,11 +362,14 @@ export const useStore = create(
         analytics: {
           cropsPlanted: 0,
           cropsHarvested: 0,
+          cropTypesPlanted: [], // Track unique crop types planted
+          eggsCollected: 0, // Track eggs collected
           modalsOpened: 0,
           viewedModals: [], // Track which crop modals have been viewed
           codexEntriesUnlocked: [],
           finalSustainabilityScore: 0
         },
+        goals: initializeGoals(), // Initialize goals tracking
 
         startSession: () => set((s) => ({
           session: { ...s.session, startTime: Date.now(), lastInteraction: Date.now() }
@@ -410,6 +414,68 @@ export const useStore = create(
           };
         }),
 
+        // Goal tracking methods
+        updateGoals: () => set((s) => {
+          const { updatedGoals, newlyCompleted } = updateGoalProgress(s.session.goals, s);
+
+          // Show notifications for newly completed goals
+          if (newlyCompleted.length > 0) {
+            newlyCompleted.forEach(goal => {
+              s.ui.setFeedback({
+                success: true,
+                message: `🎉 Goal Complete: ${goal.title}! Earned: ${goal.reward}`,
+                timestamp: Date.now(),
+              });
+            });
+          }
+
+          return {
+            session: {
+              ...s.session,
+              goals: updatedGoals,
+            }
+          };
+        }),
+
+        trackCropPlanted: (cropType) => set((s) => {
+          const cropTypesPlanted = s.session.analytics.cropTypesPlanted || [];
+          const updatedTypes = cropTypesPlanted.includes(cropType)
+            ? cropTypesPlanted
+            : [...cropTypesPlanted, cropType];
+
+          const newState = {
+            session: {
+              ...s.session,
+              analytics: {
+                ...s.session.analytics,
+                cropTypesPlanted: updatedTypes,
+              }
+            }
+          };
+
+          // Update goals after tracking
+          setTimeout(() => get().session.updateGoals(), 0);
+
+          return newState;
+        }),
+
+        trackEggCollected: () => set((s) => {
+          const newState = {
+            session: {
+              ...s.session,
+              analytics: {
+                ...s.session.analytics,
+                eggsCollected: (s.session.analytics.eggsCollected || 0) + 1,
+              }
+            }
+          };
+
+          // Update goals after tracking
+          setTimeout(() => get().session.updateGoals(), 0);
+
+          return newState;
+        }),
+
         resetSession: () => set((s) => ({
           game: {
             isPlaying: false,
@@ -449,11 +515,14 @@ export const useStore = create(
             analytics: {
               cropsPlanted: 0,
               cropsHarvested: 0,
+              cropTypesPlanted: [],
+              eggsCollected: 0,
               modalsOpened: 0,
               viewedModals: [],
               codexEntriesUnlocked: [],
               finalSustainabilityScore: 0
-            }
+            },
+            goals: initializeGoals(), // Reset goals
           },
           sustainability: initializeSustainabilityState(),
           quests: {
@@ -506,6 +575,11 @@ export const useStore = create(
           // Add eggs to inventory
           if (eggsProduced > 0) {
             state.inventory.addItem('egg', eggsProduced);
+
+            // Track eggs collected for goals
+            for (let i = 0; i < eggsProduced; i++) {
+              state.session.trackEggCollected();
+            }
           }
 
           set((s) => ({

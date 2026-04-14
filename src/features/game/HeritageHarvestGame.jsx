@@ -4,6 +4,7 @@ import { getFarmStats } from '@/features/farm/farm.service';
 import { VirtualJoystick } from '@/features/input';
 import { ToolFeedback, ToolSelector, SeedSelector } from '@/features/tools';
 import { HeritageCodex } from '@/features/codex';
+import { useCodexUnlockTracking } from '@/features/codex/useCodexUnlockTracking';
 import { Shop } from '@/features/shop';
 import EducationalModal from '@/features/education/EducationalModal.module';
 import { DayTransition } from '@/features/time';
@@ -44,6 +45,9 @@ function HeritageHarvestGame() {
 
     // Quest integration - automatically tracks progress and shows completion notifications
     const { completedQuest, clearCompletedQuest } = useQuestIntegration();
+
+    // Codex unlock tracking - automatically tracks and persists unlocked entries
+    useCodexUnlockTracking();
 
     // Audio integration - manages background music and sound effects
     const { initialize: initializeAudio } = useAudio();

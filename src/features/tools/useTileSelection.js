@@ -138,6 +138,9 @@ export function useTileSelection() {
                     cropsPlanted: currentPlanted + 1
                 });
 
+                // Track crop type planted for goals
+                useStore.getState().session.trackCropPlanted(selectedSeed);
+
                 console.log('🌱 Crop planted! Analytics:', useStore.getState().session.analytics);
             }
 
