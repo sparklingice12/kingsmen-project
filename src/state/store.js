@@ -31,7 +31,8 @@ export const useStore = create(
         modalOpen: null, // null | 'education' | 'codex' | 'quest' | 'shop'
         modalData: null,
         feedback: null, // { success: boolean, message: string, timestamp: number }
-        npcDialogueOpen: false, // NPC dialogue trigger
+        npcDialogueOpen: false,
+        npcScreenPosition: null,
         setTheme: (theme) => {
           set((s) => ({ ui: { ...s.ui, theme } }));
           document.documentElement.classList.toggle('dark', theme === 'dark');
@@ -45,6 +46,7 @@ export const useStore = create(
         setFeedback: (feedback) => set((s) => ({ ui: { ...s.ui, feedback } })),
         clearFeedback: () => set((s) => ({ ui: { ...s.ui, feedback: null } })),
         setNPCDialogueOpen: (open) => set((s) => ({ ui: { ...s.ui, npcDialogueOpen: open } })),
+        setNPCScreenPosition: (pos) => set((s) => ({ ui: { ...s.ui, npcScreenPosition: pos } })),
       },
 
       // Data slice
@@ -55,6 +57,26 @@ export const useStore = create(
         setItems: (items) => set((s) => ({ data: { ...s.data, items } })),
         setLoading: (loading) => set((s) => ({ data: { ...s.data, loading } })),
         setError: (error) => set((s) => ({ data: { ...s.data, error } })),
+      },
+
+      // Pause Menu slice (Requirements 1.2, 9.2, 9.3)
+      pauseMenu: {
+        isOpen: false,
+        currentScreen: 'main', // 'main' | 'howToPlay' | 'resetConfirm'
+
+        open: () => set((s) => ({
+          pauseMenu: { ...s.pauseMenu, isOpen: true, currentScreen: 'main' },
+          game: { ...s.game, isPaused: true }
+        })),
+
+        close: () => set((s) => ({
+          pauseMenu: { ...s.pauseMenu, isOpen: false, currentScreen: 'main' },
+          game: { ...s.game, isPaused: false }
+        })),
+
+        setScreen: (screen) => set((s) => ({
+          pauseMenu: { ...s.pauseMenu, currentScreen: screen }
+        })),
       },
 
       // Language slice

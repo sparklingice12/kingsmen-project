@@ -1,4 +1,6 @@
 import { OrthographicCamera } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
+import { useEffect } from 'react';
 import { FarmGrid, FarmBackground, FarmFence } from '@/features/farm/components';
 import { Player } from '@/features/player/components';
 import { PhysicsWorld } from '@/features/physics';
@@ -9,22 +11,25 @@ import { NPCGuide } from '@/features/npc';
 import { AnimalsModule } from '@/features/animals';
 import { useStore } from '@/state/store';
 
-/**
- * Main 3D Scene Component
- * 
- * Sets up the R3F scene with:
- * - Orthographic camera positioned above the farm
- * - Basic ambient and directional lighting
- * - Grid helper for development (optional)
- * - Physics world with boundaries
- * - Farm grid with 64 tiles
- * - Player character
- * - NPC Guide (scarecrow)
- */
+const MIN_VISIBLE_WIDTH = 18;
+const MAX_ZOOM = 80;
+const MIN_ZOOM = 40;
+
+function ResponsiveCamera() {
+    const { camera, size } = useThree();
+
+    useEffect(() => {
+        const zoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, size.width / MIN_VISIBLE_WIDTH));
+        camera.zoom = zoom;
+        camera.updateProjectionMatrix();
+    }, [camera, size.width, size.height]);
+
+    return null;
+}
+
 function Scene() {
     const setNPCDialogueOpen = useStore((s) => s.ui.setNPCDialogueOpen);
 
-    // Get hover data for watering can preview
     const { hoveredTile, affectedTileIds } = useTileSelection();
 
     const handleNPCTap = () => {
@@ -42,6 +47,7 @@ function Scene() {
                 near={0.1}
                 far={1000}
             />
+            <ResponsiveCamera />
 
             {/* Dynamic Lighting - changes with time of day */}
             <DynamicLighting />

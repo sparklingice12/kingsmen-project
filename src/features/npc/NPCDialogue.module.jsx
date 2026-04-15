@@ -173,15 +173,44 @@ function NPCDialogue() {
         }
     }, [npcDialogueOpen, setNPCDialogueOpen, nextQuest, completedCount, totalQuests]);
 
+    const npcScreenPosition = useStore((s) => s.ui.npcScreenPosition);
+
     const handleClose = () => {
         setIsVisible(false);
     };
+
+    const margin = 12;
+
+    const getDialogueStyle = () => {
+        if (!npcScreenPosition) return undefined;
+
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const isPortrait = vh > vw;
+        const rightReserve = isPortrait ? margin : 100;
+        const maxWidth = Math.min(400, vw - rightReserve - margin);
+        const rightEdge = vw - rightReserve - margin;
+        const tailGap = 16;
+
+        return {
+            position: 'fixed',
+            right: `${vw - Math.min(npcScreenPosition.x, rightEdge)}px`,
+            top: `${Math.max(margin, npcScreenPosition.y - tailGap)}px`,
+            transform: 'translateY(-100%)',
+            zIndex: 9998,
+            pointerEvents: 'auto',
+            maxWidth: `${maxWidth}px`,
+        };
+    };
+
+    const dialogueStyle = getDialogueStyle();
 
     return (
         <AnimatePresence>
             {isVisible && currentDialogue && (
                 <motion.div
-                    className="npc-dialogue-container"
+                    className={npcScreenPosition ? undefined : 'npc-dialogue-container'}
+                    style={dialogueStyle}
                     initial={{ opacity: 0, y: 20, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 20, scale: 0.95 }}

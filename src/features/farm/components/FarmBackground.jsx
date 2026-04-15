@@ -61,9 +61,6 @@ function Pond({ position, texture }) {
     return <Sprite position={position} texture={texture} size={[2.5, 2.5]} />;
 }
 
-function Shed({ position, texture }) {
-    return <Sprite position={position} texture={texture} size={[2.5, 2.0]} />;
-}
 
 function seededRandom(seed) {
     let s = seed;
@@ -82,8 +79,7 @@ function FarmBackground() {
         flowerTexture,
         rockTexture,
         bushTexture,
-        pondTexture,
-        shedTexture
+        pondTexture
     ] = useTexture([
         '/sprites/background/grass-texture.png',
         '/sprites/background/dirt-path-texture.png',
@@ -92,7 +88,6 @@ function FarmBackground() {
         '/sprites/background/rocks.png',
         '/sprites/background/bushes.png',
         '/sprites/background/pond.png',
-        '/sprites/background/farm-shed.png',
     ]);
 
     // Configure grass texture
@@ -119,13 +114,13 @@ function FarmBackground() {
 
     // Configure sprite textures for pixel-perfect rendering
     useMemo(() => {
-        [treeTexture, flowerTexture, rockTexture, bushTexture, pondTexture, shedTexture].forEach(texture => {
+        [treeTexture, flowerTexture, rockTexture, bushTexture, pondTexture].forEach(texture => {
             if (texture) {
                 texture.magFilter = THREE.NearestFilter;
                 texture.minFilter = THREE.NearestFilter;
             }
         });
-    }, [treeTexture, flowerTexture, rockTexture, bushTexture, pondTexture, shedTexture]);
+    }, [treeTexture, flowerTexture, rockTexture, bushTexture, pondTexture]);
 
     const trees = useMemo(() => {
         const rng = seededRandom(42);
@@ -216,8 +211,6 @@ function FarmBackground() {
             ))}
 
             <Pond position={[-5.5, -0.02, 0]} texture={pondTexture} />
-
-            <Shed position={[-8, -0.01, 8]} texture={shedTexture} />
         </group>
     );
 }

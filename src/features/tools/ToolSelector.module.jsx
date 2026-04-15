@@ -54,7 +54,7 @@ function ToolSelector() {
     };
 
     return (
-        <div className="fixed top-1/2 right-2 sm:right-4 transform -translate-y-1/2 pointer-events-auto" style={{ zIndex: 700 }}>
+        <div className="tool-selector-container">
             <motion.div
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}

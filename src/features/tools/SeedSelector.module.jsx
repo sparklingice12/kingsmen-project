@@ -42,8 +42,7 @@ function SeedSelector() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 100 }}
                     transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                    className="fixed top-1/2 right-20 sm:right-32 transform -translate-y-1/2 pointer-events-auto"
-                    style={{ zIndex: 800 }}
+                    className="seed-selector-container"
                 >
                     <div className="bg-amber-900/95 backdrop-blur-sm rounded-xl px-3 py-2 sm:px-4 sm:py-3 shadow-2xl border-2 border-amber-700">
                         <p className="text-[10px] sm:text-xs font-semibold text-amber-200 mb-1 sm:mb-2 text-center">

@@ -23,10 +23,10 @@ const joystickSize = getJoystickSize();
 export const INPUT_CONFIG = {
     // Virtual Joystick Settings
     JOYSTICK: {
-        // Position (bottom-left corner, adjusted to avoid HUD)
+        // Position managed by CSS class .virtual-joystick-container
         POSITION: {
             bottom: 20,
-            left: 220, // Moved further right to clear HUD panel (was 140)
+            left: 220,
         },
 
         // Sizes (responsive)

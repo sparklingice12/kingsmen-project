@@ -9,6 +9,7 @@ export const ANIMALS_CONFIG = {
         spriteSize: 32, // 32×32 pixels
         eggValue: 30, // coins per egg
         feedCost: 0, // free to feed (uses existing crops)
+        spacing: 1.0, // Distance between chickens (in world units)
 
         // Sprite sheet configuration (2×2 grid: idle and eating animations)
         spriteSheet: {
@@ -47,12 +48,12 @@ export const ANIMALS_CONFIG = {
     },
 };
 
-// Chicken spawn positions - near scarecrow in top-right grass area
-// Scarecrow is at position [6.5, 0.5, 1.5]
-// Placing chickens in the grass area around the scarecrow
+// Chicken spawn positions - near the scarecrow (at x=6.5, z=1.5)
+// Placed just below the scarecrow in the grass, outside the farm grid
+// Farm grid spans x=-3.5 to x=4.5, so x=5.5+ is safely in the grass
 export const CHICKEN_POSITIONS = [
-    { x: 5.5, y: 0.5 }, // Left of scarecrow
-    { x: 7.5, y: 0.5 }, // Right of scarecrow
+    { x: 5.8, y: 2.5 },
+    { x: 6.8, y: 2.8 },
 ];
 
 // Maximum number of chickens allowed

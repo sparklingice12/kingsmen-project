@@ -103,6 +103,12 @@ export function useTileSelection() {
      * Handle tile click/tap
      */
     const handleTileInteraction = useCallback((clientX, clientY) => {
+        // Don't allow interactions when game is paused (Requirement 9.6, 9.7)
+        const isPaused = useStore.getState().game.isPaused;
+        if (isPaused) {
+            return;
+        }
+
         // Update session interaction time
         updateInteraction();
 

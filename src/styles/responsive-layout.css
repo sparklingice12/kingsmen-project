@@ -1,0 +1,308 @@
+/**
+ * Responsive Layout System
+ * 
+ * Handles different screen sizes and aspect ratios
+ * Optimized for:
+ * - Mobile phones (< 640px)
+ * - Tablets 7-8" (640px - 768px)
+ * - iPad / iPad Air 4:3 (768px - 1024px)
+ * - iPad Pro 4:3 (1024px - 1366px)
+ * - Laptops 16:10 / 3:2 (1366px - 1920px)
+ * - Standard 16:9 (1920×1080)
+ * - Ultra-wide 21:9+
+ */
+
+/* ===== HUD Panel (Left Side) ===== */
+.hud-panel {
+    position: absolute !important;
+    top: 0.5rem !important;
+    left: 0.5rem !important;
+    max-width: 130px !important;
+    max-height: calc(100vh - 1rem) !important;
+    max-height: calc(100dvh - 1rem) !important;
+    overflow-y: auto !important;
+    font-size: 0.7rem !important;
+    scrollbar-width: none !important;
+}
+
+.hud-panel::-webkit-scrollbar {
+    display: none !important;
+}
+
+@media (min-width: 640px) {
+    .hud-panel {
+        top: 0.75rem !important;
+        left: 0.75rem !important;
+        max-width: 160px !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hud-panel {
+        top: 1rem !important;
+        left: 1rem !important;
+        max-width: 190px !important;
+        font-size: 0.875rem !important;
+    }
+}
+
+@media (min-width: 1440px) {
+    .hud-panel {
+        max-width: 210px !important;
+    }
+}
+
+/* ===== Tool Selector (Right Side) ===== */
+.tool-selector-container {
+    position: fixed !important;
+    top: 50% !important;
+    right: 0.5rem !important;
+    transform: translateY(-50%) !important;
+    z-index: 700 !important;
+}
+
+@media (min-width: 640px) {
+    .tool-selector-container {
+        right: 0.75rem !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .tool-selector-container {
+        right: 1rem !important;
+    }
+}
+
+/* ===== Seed Selector ===== */
+.seed-selector-container {
+    position: fixed !important;
+    top: 50% !important;
+    right: 4.5rem !important;
+    transform: translateY(-50%) !important;
+    z-index: 800 !important;
+}
+
+@media (min-width: 640px) {
+    .seed-selector-container {
+        right: 6rem !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .seed-selector-container {
+        right: 7rem !important;
+    }
+}
+
+/* ===== Virtual Joystick (Bottom Left) ===== */
+.virtual-joystick-container {
+    position: fixed !important;
+    bottom: 1.5rem !important;
+    left: 10rem !important;
+    z-index: 600 !important;
+}
+
+@media (max-width: 639px) {
+    .virtual-joystick-container {
+        bottom: 1rem !important;
+        left: 9rem !important;
+        transform: scale(0.85) !important;
+        transform-origin: bottom left !important;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+    .virtual-joystick-container {
+        bottom: 1.5rem !important;
+        left: 11rem !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .virtual-joystick-container {
+        bottom: 2rem !important;
+        left: 13rem !important;
+    }
+}
+
+@media (min-width: 1440px) {
+    .virtual-joystick-container {
+        left: 14rem !important;
+    }
+}
+
+/* ===== NPC Dialogue (fallback only - normally positioned via JS projection) ===== */
+.npc-dialogue-container {
+    position: fixed !important;
+    z-index: 9998 !important;
+    pointer-events: auto !important;
+    max-width: 90vw !important;
+    bottom: 6rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+/* ===== Tablet-specific (4:3 aspect ratio, iPads) ===== */
+@media (max-aspect-ratio: 4/3) and (min-width: 768px) {
+    .hud-panel {
+        max-width: 145px !important;
+        max-height: calc(100vh - 2rem) !important;
+        max-height: calc(100dvh - 2rem) !important;
+        font-size: 0.7rem !important;
+    }
+
+    .tool-selector-container button {
+        width: 3.25rem !important;
+        height: 3.25rem !important;
+    }
+
+    .seed-selector-container {
+        right: 5rem !important;
+    }
+
+    .virtual-joystick-container {
+        left: 10rem !important;
+        bottom: 1.5rem !important;
+    }
+}
+
+/* iPad Pro specific (1024px+, 4:3) */
+@media (max-aspect-ratio: 4/3) and (min-width: 1024px) {
+    .hud-panel {
+        max-width: 165px !important;
+        font-size: 0.75rem !important;
+    }
+
+    .tool-selector-container button {
+        width: 3.75rem !important;
+        height: 3.75rem !important;
+    }
+
+    .seed-selector-container {
+        right: 5.5rem !important;
+    }
+
+    .virtual-joystick-container {
+        left: 11.5rem !important;
+    }
+}
+
+/* ===== 3:2 Aspect Ratio (Surface, Matebook) ===== */
+@media (min-aspect-ratio: 4/3) and (max-aspect-ratio: 3/2) and (min-width: 768px) {
+    .hud-panel {
+        max-height: calc(100vh - 2rem) !important;
+        max-height: calc(100dvh - 2rem) !important;
+        font-size: 0.75rem !important;
+    }
+
+    .tool-selector-container button {
+        width: 3.5rem !important;
+        height: 3.5rem !important;
+    }
+}
+
+/* ===== Small screens with limited height ===== */
+@media (max-height: 600px) {
+    .hud-panel {
+        max-height: calc(100vh - 0.75rem) !important;
+        max-height: calc(100dvh - 0.75rem) !important;
+        max-width: 120px !important;
+        font-size: 0.6rem !important;
+        padding: 0.35rem !important;
+    }
+
+    .tool-selector-container button {
+        width: 2.75rem !important;
+        height: 2.75rem !important;
+    }
+
+    .virtual-joystick-container {
+        bottom: 0.5rem !important;
+        transform: scale(0.75) !important;
+        transform-origin: bottom left !important;
+    }
+}
+
+@media (max-width: 1024px) and (max-height: 768px) {
+    .hud-panel {
+        max-width: 135px !important;
+        padding: 0.4rem !important;
+    }
+
+    .tool-selector-container button {
+        width: 3rem !important;
+        height: 3rem !important;
+    }
+}
+
+/* ===== Responsive Font Scaling ===== */
+@media (max-width: 640px) {
+    .hud-panel * {
+        font-size: 0.65rem !important;
+    }
+
+    .tool-selector-container * {
+        font-size: 0.6rem !important;
+    }
+
+    .seed-selector-container * {
+        font-size: 0.65rem !important;
+    }
+}
+
+/* ===== Portrait mode handling ===== */
+@media (orientation: portrait) and (max-width: 768px) {
+    .portrait-warning {
+        display: flex !important;
+    }
+
+    .hud-panel {
+        max-width: 110px !important;
+        font-size: 0.6rem !important;
+    }
+
+    .virtual-joystick-container {
+        left: 7.5rem !important;
+        bottom: 1rem !important;
+        transform: scale(0.8) !important;
+        transform-origin: bottom left !important;
+    }
+
+    .tool-selector-container button {
+        width: 2.75rem !important;
+        height: 2.75rem !important;
+    }
+}
+
+/* Portrait tablets (iPad portrait) */
+@media (orientation: portrait) and (min-width: 768px) {
+    .hud-panel {
+        max-width: 140px !important;
+        max-height: calc(60vh) !important;
+        max-height: calc(60dvh) !important;
+    }
+
+    .virtual-joystick-container {
+        left: 10rem !important;
+        bottom: 1.5rem !important;
+    }
+
+    .tool-selector-container {
+        top: auto !important;
+        bottom: 1rem !important;
+        right: 0.75rem !important;
+        transform: none !important;
+    }
+
+    .tool-selector-container > div {
+        flex-direction: row !important;
+    }
+
+    .seed-selector-container {
+        top: auto !important;
+        bottom: 6rem !important;
+        right: 0.75rem !important;
+        transform: none !important;
+    }
+}

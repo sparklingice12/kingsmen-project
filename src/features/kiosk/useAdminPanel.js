@@ -21,6 +21,11 @@ export function useAdminPanel() {
             // This will be handled by a separate touch handler
         };
 
+        // Listen for custom event from pause menu
+        const handleOpenAdminPanel = () => {
+            setIsOpen(true);
+        };
+
         // Add global store reference for admin panel access
         if (typeof window !== 'undefined') {
             window.__HERITAGE_HARVEST_STORE__ = {
@@ -36,8 +41,10 @@ export function useAdminPanel() {
         }
 
         window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('openAdminPanel', handleOpenAdminPanel);
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('openAdminPanel', handleOpenAdminPanel);
             if (typeof window !== 'undefined') {
                 delete window.__HERITAGE_HARVEST_STORE__;
             }

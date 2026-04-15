@@ -15,7 +15,6 @@ import { NPCDialogue } from '@/features/npc';
 import { useQuestIntegration, QuestCompletionNotification } from '@/features/quests';
 import { useAudio } from '@/features/audio/hooks/useAudio';
 import { SettingsModal } from '@/features/settings';
-import AudioToggle from '@/features/audio/components/AudioToggle';
 import { AttractMode, useInactivityDetection, AutoReset } from '@/features/kiosk';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
@@ -137,7 +136,7 @@ function HeritageHarvestGame() {
     if (!isPlaying) {
         return (
             <div
-                className="relative w-full h-screen overflow-hidden bg-cover bg-center bg-no-repeat"
+                className="relative w-full h-screen h-dvh overflow-hidden bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: 'url(/start-page/background.png)' }}
             >
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(46,30,20,0.7), rgba(46,30,20,0.3), rgba(46,30,20,0.75))' }} />
@@ -240,8 +239,11 @@ function HeritageHarvestGame() {
     }
 
     return (
-        <div className="relative w-full h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom, #3a2518, #2e1e14, #241610)' }}>
+        <div className="relative w-full h-screen h-dvh overflow-hidden" style={{ background: 'linear-gradient(to bottom, #3a2518, #2e1e14, #241610)' }}>
             <GameCanvas onLoadingComplete={() => setIsLoading(false)} />
+
+            {/* Pause Button - positioned independently */}
+            {!isLoading && <div />}
 
             {/* Only show UI elements after loading is complete */}
             {!isLoading && (
@@ -255,8 +257,8 @@ function HeritageHarvestGame() {
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="absolute top-2 left-2 sm:top-4 sm:left-4 backdrop-blur-sm rounded-xl px-3 py-2 sm:px-5 sm:py-4 space-y-1 sm:space-y-2 shadow-2xl border-2 max-w-[180px] sm:max-w-none"
-                            style={{ backgroundColor: 'rgba(58, 37, 24, 0.95)', borderColor: '#b09060', maxHeight: 'calc(100vh - 16px)', overflowY: 'auto' }}
+                            className="hud-panel backdrop-blur-sm rounded-xl px-3 py-2 sm:px-5 sm:py-4 space-y-1 sm:space-y-2 shadow-2xl border-2"
+                            style={{ backgroundColor: 'rgba(58, 37, 24, 0.95)', borderColor: '#b09060' }}
                         >
                             <div className="flex items-center gap-2 pb-1 sm:pb-2 border-b" style={{ borderColor: 'rgba(176, 144, 96, 0.4)' }}>
                                 <div className="flex-1">
@@ -355,13 +357,15 @@ function HeritageHarvestGame() {
                                 <span>Goals</span>
                             </button>
 
-                            {/* Audio Toggle */}
-                            <div className="mt-1 sm:mt-2">
-                                <AudioToggle
-                                    className="w-full px-2 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold text-[10px] sm:text-sm transition-all duration-200 flex items-center justify-center gap-1 sm:gap-2 border-2 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
-                                    style={{ background: 'linear-gradient(to right, #4a3020, #3a2515)', borderColor: '#b09060', color: '#e8d5b0' }}
-                                />
-                            </div>
+                            {/* Settings Button (replaces Audio Toggle) */}
+                            <button
+                                onClick={() => useStore.getState().ui.openGameModal('settings', null)}
+                                className="w-full mt-1 sm:mt-2 px-2 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold text-[10px] sm:text-sm transition-all duration-200 flex items-center justify-center gap-1 sm:gap-2 border-2 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+                                style={{ background: 'linear-gradient(to right, #4a3020, #3a2515)', borderColor: '#b09060', color: '#e8d5b0' }}
+                            >
+                                <span className="text-sm sm:text-lg">⚙️</span>
+                                <span>Settings</span>
+                            </button>
                         </motion.div>
                     </div>
                 </div>

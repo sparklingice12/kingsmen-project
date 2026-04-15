@@ -1,21 +1,30 @@
 import { useRef, useMemo, Suspense } from 'react';
-import { useLoader } from '@react-three/fiber';
+import { useLoader, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useStore } from '@/state/store';
 
-/**
- * NPCGuide Component
- * 
- * Renders a scarecrow NPC sprite in the R3F scene.
- * - Positioned at a fixed location on the farm (top-right corner)
- * - Uses scarecrow.png sprite sheet (4x4 grid)
- * - Clickable to show dialogue/quest information
- * 
- * Requirements: 2.4.1
- */
+const NPC_POSITION = [6.5, 0.5, 1.5];
+const DIALOGUE_OFFSET_Z = -2.0;
+
 function NPCGuideInner({ onTap }) {
     const meshRef = useRef();
+    const projVec = useMemo(() => new THREE.Vector3(), []);
+    const { camera, size } = useThree();
+    const setNPCScreenPosition = useStore((s) => s.ui.setNPCScreenPosition);
 
-    // Load the scarecrow sprite sheet texture
+    useFrame(() => {
+        projVec.set(NPC_POSITION[0], NPC_POSITION[1], NPC_POSITION[2] + DIALOGUE_OFFSET_Z);
+        projVec.project(camera);
+        const x = (projVec.x * 0.5 + 0.5) * size.width;
+        const y = (-projVec.y * 0.5 + 0.5) * size.height;
+
+        // Only update if position changed significantly (avoid unnecessary re-renders)
+        const currentPos = useStore.getState().ui.npcScreenPosition;
+        if (!currentPos || Math.abs(currentPos.x - x) > 1 || Math.abs(currentPos.y - y) > 1) {
+            setNPCScreenPosition({ x, y });
+        }
+    });
+
     const spriteSheet = useLoader(THREE.TextureLoader, '/sprites/scarecrow.png');
 
     // Create scarecrow sprite material with single frame extraction
@@ -62,7 +71,7 @@ function NPCGuideInner({ onTap }) {
     return (
         <sprite
             ref={meshRef}
-            position={[6.5, 0.5, 1.5]} // Fixed position: top-right area of farm
+            position={NPC_POSITION}
             scale={[0.8, 0.8, 1]}
             material={material}
             onClick={handleClick}

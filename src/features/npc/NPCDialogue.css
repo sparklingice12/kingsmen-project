@@ -1,39 +1,6 @@
 .npc-dialogue-container {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9998;
-    /* Below modals (9999) but above game UI (1000) */
+    /* Positioning handled by responsive-layout.css */
     pointer-events: auto;
-    max-width: 90vw;
-}
-
-/* Responsive positioning */
-@media (min-width: 768px) {
-    .npc-dialogue-container {
-        bottom: 280px;
-        left: auto;
-        right: 200px;
-        transform: none;
-    }
-}
-
-@media (min-width: 1024px) and (max-width: 1440px) {
-
-    /* Huawei Matebook 14 and similar laptops */
-    .npc-dialogue-container {
-        bottom: 200px;
-        right: 150px;
-    }
-}
-
-@media (max-width: 767px) {
-    .npc-dialogue-container {
-        bottom: 100px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
 }
 
 .npc-dialogue-bubble {
@@ -122,17 +89,16 @@
     transform: scale(0.95);
 }
 
-/* Speech bubble tail pointing down */
+/* Speech bubble tail pointing down toward the scarecrow */
 .speech-bubble-tail {
     position: absolute;
     bottom: -12px;
-    left: 85%;
-    transform: translateX(-50%);
+    right: 12px;
     width: 0;
     height: 0;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 12px solid #3a2515;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 14px solid #3a2515;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
 }
 

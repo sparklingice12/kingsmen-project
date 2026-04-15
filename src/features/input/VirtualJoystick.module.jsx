@@ -71,6 +71,12 @@ function VirtualJoystick() {
 
     // Handle touch start
     const handleTouchStart = useCallback((e) => {
+        // Don't allow joystick input when game is paused (Requirement 9.6, 9.7)
+        const isPaused = useStore.getState().game.isPaused;
+        if (isPaused) {
+            return;
+        }
+
         updateInteraction(); // Track interaction for auto-reset
 
         const touch = e.touches[0];
@@ -217,14 +223,7 @@ function VirtualJoystick() {
     }, [isActive, handleMouseMove, handleMouseUp]);
 
     return (
-        <div
-            className="fixed pointer-events-auto"
-            style={{
-                bottom: `${JOYSTICK.POSITION.bottom}px`,
-                left: `${JOYSTICK.POSITION.left}px`,
-                zIndex: 900, /* Below UI panels (1000) but above canvas */
-            }}
-        >
+        <div className="virtual-joystick-container">
             {/* Outer Circle */}
             <div
                 ref={outerRef}
