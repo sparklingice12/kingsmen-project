@@ -103,6 +103,26 @@ export default function AutoReset() {
     useEffect(() => {
         if (!isPlaying) return; // Only check during active gameplay
 
+        // Track user activity events to update lastInteraction
+        const events = [
+            'mousedown',
+            'mousemove',
+            'keypress',
+            'scroll',
+            'touchstart',
+            'click',
+            'pointerdown',
+        ];
+
+        const handleActivity = () => {
+            updateInteraction();
+        };
+
+        // Add event listeners
+        events.forEach((event) => {
+            document.addEventListener(event, handleActivity, { passive: true });
+        });
+
         const checkInactivity = () => {
             const timeSinceInteraction = getTimeSinceLastInteraction();
             const timeUntilWarning = KIOSK_CONFIG.INACTIVITY_TIMEOUT - timeSinceInteraction;
@@ -124,8 +144,15 @@ export default function AutoReset() {
         };
 
         const interval = setInterval(checkInactivity, 1000); // Check every second
-        return () => clearInterval(interval);
-    }, [isPlaying, getTimeSinceLastInteraction, showWarning, handleReset]);
+
+        return () => {
+            clearInterval(interval);
+            // Remove event listeners
+            events.forEach((event) => {
+                document.removeEventListener(event, handleActivity);
+            });
+        };
+    }, [isPlaying, getTimeSinceLastInteraction, showWarning, handleReset, updateInteraction]);
 
     // Countdown effect for warning
     useEffect(() => {
