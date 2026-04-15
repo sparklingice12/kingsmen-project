@@ -222,7 +222,7 @@ function VirtualJoystick() {
             style={{
                 bottom: `${JOYSTICK.POSITION.bottom}px`,
                 left: `${JOYSTICK.POSITION.left}px`,
-                zIndex: 1000,
+                zIndex: 900, /* Below UI panels (1000) but above canvas */
             }}
         >
             {/* Outer Circle */}

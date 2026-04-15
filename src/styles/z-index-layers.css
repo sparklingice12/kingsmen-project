@@ -1,0 +1,92 @@
+/**
+ * Z-Index Layer System
+ * 
+ * Defines consistent z-index values across the application
+ * to prevent UI elements from overlapping incorrectly.
+ * 
+ * Layer hierarchy (lowest to highest):
+ * 1. Canvas/3D Scene: 0
+ * 2. Game UI (HUD, Stats): 100-500
+ * 3. Controls (Joystick, Tools): 600-900
+ * 4. Overlays (NPC Dialogue): 1000-5000
+ * 5. Modals (Shop, Codex, Goals): 9000-9500
+ * 6. System Modals (Admin, Warnings): 9900-9999
+ */
+
+/* Canvas Layer */
+.game-canvas {
+    z-index: 0;
+}
+
+/* Game UI Layer */
+.hud-panel {
+    z-index: 100;
+}
+
+.stats-panel {
+    z-index: 200;
+}
+
+.tool-feedback {
+    z-index: 300;
+}
+
+/* Controls Layer */
+.virtual-joystick {
+    z-index: 600;
+}
+
+.tool-selector {
+    z-index: 700;
+}
+
+.seed-selector {
+    z-index: 800;
+}
+
+/* Overlays Layer */
+.npc-dialogue {
+    z-index: 1000;
+}
+
+.day-transition {
+    z-index: 2000;
+}
+
+.notification {
+    z-index: 3000;
+}
+
+/* Modals Layer */
+.modal-backdrop {
+    z-index: 9000;
+}
+
+.modal-content {
+    z-index: 9100;
+}
+
+.shop-modal {
+    z-index: 9200;
+}
+
+.codex-modal {
+    z-index: 9300;
+}
+
+.goals-modal {
+    z-index: 9400;
+}
+
+/* System Modals Layer */
+.admin-panel {
+    z-index: 9900;
+}
+
+.auto-reset-warning {
+    z-index: 9950;
+}
+
+.attract-mode {
+    z-index: 9999;
+}
