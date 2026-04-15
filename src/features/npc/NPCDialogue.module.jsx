@@ -67,12 +67,23 @@ function NPCDialogue() {
     const tiles = useStore((s) => s.farm.tiles);
     const npcDialogueOpen = useStore((s) => s.ui.npcDialogueOpen);
     const setNPCDialogueOpen = useStore((s) => s.ui.setNPCDialogueOpen);
+    const modalOpen = useStore((s) => s.ui.modalOpen); // Check if any modal is open
 
     // Get quest information
     const { nextQuest, completedCount, totalQuests } = useQuests();
 
+    // Hide NPC dialogue when any modal opens
+    useEffect(() => {
+        if (modalOpen && isVisible) {
+            setIsVisible(false);
+        }
+    }, [modalOpen, isVisible]);
+
     // Show welcome message on session start
     useEffect(() => {
+        // Don't show if any modal is open
+        if (modalOpen) return;
+
         if (isPlaying && !hasSeenWelcome) {
             setCurrentDialogue(DIALOGUE_CONTENT.welcome);
             setIsVisible(true);
@@ -85,11 +96,13 @@ function NPCDialogue() {
 
             return () => clearTimeout(timer);
         }
-    }, [isPlaying, hasSeenWelcome]);
+    }, [isPlaying, hasSeenWelcome, modalOpen]);
 
     // Track first-time actions for contextual hints
     useEffect(() => {
         if (!isPlaying) return;
+        // Don't show hints if any modal is open
+        if (modalOpen) return;
 
         // Check for first tilled tile
         const hasTilled = tiles.some(t => t.state === 'tilled');
@@ -132,7 +145,7 @@ function NPCDialogue() {
 
             return () => clearTimeout(timer);
         }
-    }, [tiles, isPlaying, firstActions]);
+    }, [tiles, isPlaying, firstActions, modalOpen]);
 
     // Handle NPC tap to show active quest
     useEffect(() => {
