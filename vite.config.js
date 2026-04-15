@@ -15,13 +15,7 @@ export default defineConfig({
   },
   build: {
     target: 'es2015',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console.logs in production
-        drop_debugger: true,
-      },
-    },
+    minify: 'esbuild', // Use esbuild (faster, no extra dependency)
     rollupOptions: {
       output: {
         manualChunks: {
